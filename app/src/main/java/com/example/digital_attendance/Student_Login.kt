@@ -38,31 +38,40 @@ class Student_Login : AppCompatActivity() {
         }
 
         btn.setOnClickListener {
+            val b = Bundle()
             c = mp.getAllData() ?: return@setOnClickListener
 
             // Check for credentials
             if (inputEnroll.text.toString() == "admin@gmail.com" && inputPassword.text.toString() == "123456") {
                 startActivity(Intent(this, Admin_Page::class.java))
             } else {
-                c.moveToFirst()
-                while (!c.isAfterLast) {
-                    if (inputEnroll.text.toString() == c.getString(0) &&
-                        inputPassword.text.toString() == c.getString(1)
-                    ) {
-                        startActivity(Intent(this, Student_Page::class.java))
-                        return@setOnClickListener
-                    }
-                    c.moveToNext()
+                if (c.moveToFirst()) {
+                    do {
+                        val enrollment = c.getString(0)
+                        println(enrollment)
+
+                        if (inputEnroll.text.toString() == c.getString(0) && inputPassword.text.toString() == c.getString(
+                                1
+                            )
+                        ) {
+                            // Successful login
+                            Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show()
+                            b.putString("enrollment", enrollment)
+                            val i = Intent(this, Student_Page::class.java)
+                            i.putExtras(b)
+                            startActivity(i)
+
+                            return@setOnClickListener // Exit the onClick listener
+                        }
+                    } while (c.moveToNext())
+                    Toast.makeText(
+                        this,
+                        "Invalid credentials",
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+                    c.close()
                 }
-
-                // Credentials not found
-                Toast.makeText(
-                    this,
-                    "Invalid credentials",
-                    Toast.LENGTH_SHORT
-                ).show()
-
-                c.close()
             }
         }
     }
