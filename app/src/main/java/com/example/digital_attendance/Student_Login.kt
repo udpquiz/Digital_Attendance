@@ -39,7 +39,7 @@ class Student_Login : AppCompatActivity() {
 
         btn.setOnClickListener {
             val b = Bundle()
-            c = mp.getAllData() ?: return@setOnClickListener
+            c = mp.getAllData()!!
 
             // Check for credentials
             if (inputEnroll.text.toString() == "admin@gmail.com" && inputPassword.text.toString() == "123456") {
