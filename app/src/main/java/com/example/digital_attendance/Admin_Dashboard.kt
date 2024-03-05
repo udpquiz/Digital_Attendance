@@ -29,7 +29,7 @@ class Admin_Dashboard : AppCompatActivity() {
 
         val BtnMStudent: Button =findViewById(R.id.btn_m_student)
         BtnMStudent.setOnClickListener {
-            val i: Intent = Intent(this,Manage_Schedule::class.java)
+            val i: Intent = Intent(this,Add_Schedule::class.java)
             startActivity(i)
         }
     }
