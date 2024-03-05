@@ -14,5 +14,12 @@ class Faculty_Login : AppCompatActivity() {
             val i:Intent=Intent(this,Manage_Faculty::class.java)
             startActivity(i)
         }
+
+        val btn_uname:Button=findViewById(R.id.input_faculty_code)
+        val btn_password:Button=findViewById(R.id.input_faculty_password)
+
+        if (btn_uname.text.toString() == "admin@gmail.com" && btn_password.text.toString() == "123456") {
+            startActivity(Intent(this, Admin_Page::class.java))
+        }
     }
 }

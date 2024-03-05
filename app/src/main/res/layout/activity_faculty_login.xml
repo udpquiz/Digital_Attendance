@@ -29,7 +29,7 @@
 
 
             <EditText
-                android:id="@+id/inputFacultyCode"
+                android:id="@+id/input_faculty_code"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@drawable/shape"
@@ -42,7 +42,7 @@
                 android:layout_marginTop="40dp"/>
 
             <EditText
-                android:id="@+id/inputName"
+                android:id="@+id/input_faculty_password"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@drawable/shape"

@@ -35,7 +35,7 @@
                 android:background="@drawable/shape"
                 android:drawableLeft="@drawable/baseline_person_24"
                 android:drawablePadding="8dp"
-                android:hint="Faculty Code."
+                android:hint="Admin Username."
                 android:padding="8dp"
                 android:textColor="@color/black"
                 android:textColorHighlight="@color/cardview_dark_background"
