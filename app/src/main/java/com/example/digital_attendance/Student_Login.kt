@@ -43,7 +43,7 @@ class Student_Login : AppCompatActivity() {
 
             // Check for credentials
             if (inputEnroll.text.toString() == "admin@gmail.com" && inputPassword.text.toString() == "123456") {
-                startActivity(Intent(this, Admin_Page::class.java))
+                startActivity(Intent(this, Admin_Dashboard::class.java))
             } else {
                 if (c.moveToFirst()) {
                     do {

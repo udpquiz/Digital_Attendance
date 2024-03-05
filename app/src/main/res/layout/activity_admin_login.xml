@@ -9,7 +9,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:background="@drawable/login"
-    tools:context=".Admin_Login">
+    tools:context=".Faculty_Login">
 
 
     <androidx.cardview.widget.CardView
@@ -35,7 +35,7 @@
                 android:background="@drawable/shape"
                 android:drawableLeft="@drawable/baseline_person_24"
                 android:drawablePadding="8dp"
-                android:hint="Admin Username."
+                android:hint="Enter Faculty Code."
                 android:padding="8dp"
                 android:textColor="@color/black"
                 android:textColorHighlight="@color/cardview_dark_background"
@@ -46,7 +46,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@drawable/shape"
-                android:drawableLeft="@drawable/icons8_password"
+                android:drawableLeft="@drawable/baseline_person_24"
                 android:drawablePadding="8dp"
                 android:hint="Password"
                 android:padding="8dp"
