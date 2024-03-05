@@ -7,33 +7,30 @@ import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.Toast
 
-class View_Faculty : AppCompatActivity() {
-    lateinit var c: Cursor
+class View_Course : AppCompatActivity() {
+    lateinit var c: Cursor;
     lateinit var aa: ArrayAdapter<String>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_view_faculty)
+        setContentView(R.layout.activity_view_course)
+        val listview: ListView =findViewById(R.id.listView)
 
-        val LIST: ListView =findViewById(R.id.lv_f)
+        val sql = Crud_Course(this)
 
-        val sql = crud_faculty(this)
-
-        c = sql.viewFaculty()!!
+        c = sql.viewCourse()!!
         if(c.getCount() === 0)
         {
             Toast.makeText(this,"Record Not Added!!", Toast.LENGTH_SHORT).show()
         }
 
-        aa =  ArrayAdapter(this,android.R.layout.simple_dropdown_item_1line)
+        aa = ArrayAdapter(this,androidx.appcompat.R.layout.support_simple_spinner_dropdown_item)
         c.moveToFirst()
-//        val headerView = layoutInflater.inflate(R.layout.list_header_layout, null)
-//        LIST.addHeaderView(headerView)
         while (!c.isAfterLast)
         {
-            aa.add(c.getString(0)+"   "+c.getString(1)+"   "+c.getString(2)+"   "+c.getString(3))
+            aa.add(c.getString(0)+"   "+c.getString(1)+"   "+c.getString(2))
             c.moveToNext()
         }
         c.close()
-        LIST.adapter=aa
+        listview.adapter=aa
     }
 }

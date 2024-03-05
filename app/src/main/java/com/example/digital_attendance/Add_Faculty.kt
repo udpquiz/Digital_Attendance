@@ -1,5 +1,6 @@
 package com.example.digital_attendance
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -25,7 +26,8 @@ class Add_Faculty : AppCompatActivity() {
                 edfname.text.toString(),edfemail.text.toString(),edfpassword.text.toString())
             if (r == true)
             {
-                Toast.makeText(this, " Faculty added $edfname", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, " Faculty added ",Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this,Manage_Faculty::class.java))
             }
             else{
                 Toast.makeText(this, "Faculty add failed", Toast.LENGTH_SHORT).show()

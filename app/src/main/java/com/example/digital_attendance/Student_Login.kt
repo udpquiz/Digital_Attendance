@@ -32,6 +32,7 @@ class Student_Login : AppCompatActivity() {
             while (csvReader.readNext().also { nextLine = it } != null) {
                 val isInserted: Boolean = mp.insertData(
                     nextLine?.get(0) ?: "", nextLine?.get(1) ?: ""
+
                 )
             }
             csvReader.close()
