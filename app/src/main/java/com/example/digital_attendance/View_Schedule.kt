@@ -18,7 +18,7 @@ class View_Schedule : AppCompatActivity() {
         recyclerView = findViewById(R.id.r)
         adapter = ScheduleAdapter()
 
-        val sql = schedule_crud(this)
+        val sql = LJCRUD(this)
         val c = sql.viewsc()
 
         if (c != null && c.count > 0) {

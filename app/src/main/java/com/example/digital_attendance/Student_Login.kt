@@ -21,7 +21,7 @@ class Student_Login : AppCompatActivity() {
         val inputEnroll = findViewById<EditText>(R.id.inputEnroll)
         val inputPassword = findViewById<EditText>(R.id.inputPassword)
         val btn = findViewById<Button>(R.id.login_BTtn)
-        val mp = datahelper(this)
+        val mp = LJCRUD(this)
 
         val inputStream = assets.open("data.csv")
 

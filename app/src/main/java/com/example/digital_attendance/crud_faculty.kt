@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
 class crud_faculty(context: Context): SQLiteOpenHelper(context,"Attendance",null,1) {
+//class crud_faculty(context: Context): SQLiteOpenHelper(context,"LJ",null,1) {
     companion object{
         val TAB = "faculty"
     }

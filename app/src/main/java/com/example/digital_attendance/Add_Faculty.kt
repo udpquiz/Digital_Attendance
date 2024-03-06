@@ -19,7 +19,8 @@ class Add_Faculty : AppCompatActivity() {
         val edfemail: EditText =findViewById(R.id.ed_f_email)
         val edfpassword: EditText =findViewById(R.id.ed_f_password)
 
-        val sql = crud_faculty(this)
+        val sql = LJCRUD(this)
+
 
         btnadd.setOnClickListener {
             val r:Boolean = sql.insertFaculty(edfcode.text.toString().toInt(),

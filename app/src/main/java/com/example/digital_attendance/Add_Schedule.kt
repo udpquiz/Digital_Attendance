@@ -71,7 +71,7 @@ class Add_Schedule : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         val suba: ArrayAdapter<String> = ArrayAdapter<String>(this,android.R.layout.select_dialog_item,asub)
         sub.setAdapter(suba)
         spin_lec.onItemSelectedListener=this
-        val db=schedule_crud(this)
+        val db=LJCRUD(this)
 
         btnsave.setOnClickListener {
 

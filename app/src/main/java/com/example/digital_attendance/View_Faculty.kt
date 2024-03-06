@@ -16,7 +16,7 @@ class View_Faculty : AppCompatActivity() {
 
         val LIST: ListView =findViewById(R.id.lv_f)
 
-        val sql = crud_faculty(this)
+        val sql = LJCRUD(this)
 
         c = sql.viewFaculty()!!
         if(c.getCount() === 0)

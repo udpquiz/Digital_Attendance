@@ -21,7 +21,7 @@ class Faculty_Login : AppCompatActivity() {
             startActivity(i)
         }
 
-        val sql = crud_faculty(this)
+        val sql = LJCRUD(this)
 
         val uname: EditText = findViewById(R.id.input_admin_uname)
         val password: EditText = findViewById(R.id.input_password)

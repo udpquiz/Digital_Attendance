@@ -18,7 +18,7 @@ class Add_Course : AppCompatActivity() {
 
         val ADD_COURSE: Button =findViewById(R.id.btn_add_course)
 
-        val sql = Crud_Course(this)
+        val sql = LJCRUD(this)
 
         ADD_COURSE.setOnClickListener {
             val r:Boolean = sql.addCourse(ADD_C_CODE.text.toString(),ADD_SEM.text.toString(),ADD_NAME.text.toString())

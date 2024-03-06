@@ -6,7 +6,8 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
-class Crud_Course(context: Context): SQLiteOpenHelper(context,"Attendance2",null,1) {
+class Crud_Course(context: Context): SQLiteOpenHelper(context,"Attendance2",null,5) {
+//class Crud_Course(context: Context): SQLiteOpenHelper(context,"LJ",null,1) {
     companion object{
         const val courseTab = "course"
     }

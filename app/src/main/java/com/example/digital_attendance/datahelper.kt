@@ -6,7 +6,8 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import java.security.AccessControlContext
 
-class datahelper(context: Context):SQLiteOpenHelper(context,"DATABASE",null,1) {
+class datahelper(context: Context):SQLiteOpenHelper(context,"DATABASE",null,4) {
+//class datahelper(context: Context):SQLiteOpenHelper(context,"LJ",null,1) {
     companion object {
         const val TABLE_NAME = "Student_Login"
         const val col1 = "Enrollment_Number"

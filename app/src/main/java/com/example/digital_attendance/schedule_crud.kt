@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
 class schedule_crud(context: Context): SQLiteOpenHelper(context,"data1",null,1) {
+//class schedule_crud(context: Context): SQLiteOpenHelper(context,"LJ",null,1) {
 
 
 
