@@ -6,31 +6,45 @@ import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 class View_Schedule : AppCompatActivity() {
-    lateinit var c: Cursor
-    lateinit var aa: ArrayAdapter<String>
+    lateinit var recyclerView: RecyclerView
+    lateinit var adapter: ScheduleAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_view_schedule)
-        val list1: ListView =findViewById(R.id.list1)
+        recyclerView = findViewById(R.id.r)
+        adapter = ScheduleAdapter()
 
         val sql = schedule_crud(this)
+        val c = sql.viewsc()
 
-        c = sql.viewsc()!!
-        if(c.getCount() === 0)
-        {
-            Toast.makeText(this,"Record Not Added!!", Toast.LENGTH_SHORT).show()
+        if (c != null && c.count > 0) {
+            val schedules = mutableListOf<Schedule1>()
+            c.moveToFirst()
+            while (!c.isAfterLast) {
+                val schedule = Schedule1(
+                    c.getString(0),
+                    c.getString(1),
+                    c.getString(2),
+                    c.getString(3),
+                    c.getString(4),
+                    c.getString(5),
+                    c.getString(6),
+                    c.getString(7)
+                )
+                schedules.add(schedule)
+                c.moveToNext()
+            }
+            adapter.setData(schedules)
+        } else {
+            // Handle case when no records found
         }
+        c?.close()
 
-        aa = ArrayAdapter(this,androidx.appcompat.R.layout.support_simple_spinner_dropdown_item)
-        c.moveToFirst()
-        while (!c.isAfterLast)
-        {
-            aa.add(c.getString(0)+" "+c.getString(1)+" "+c.getString(2)+" "+c.getString(3)+" "+c.getString(4)+" "+c.getString(5)+" "+c.getString(6)+" "+c.getString(7))
-            c.moveToNext()
-        }
-        c.close()
-        list1.adapter=aa
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(this)
     }
 }
