@@ -14,7 +14,7 @@ class Admin_Dashboard : AppCompatActivity() {
         val b=intent.extras
 
         val heading: TextView =findViewById(R.id.heading)
-        heading.text=b?.getString("email")
+//        heading.text=b?.getString("email")
         val BtnMFaculty: Button =findViewById(R.id.btn_m_faculty)
         BtnMFaculty.setOnClickListener {
             val i: Intent = Intent(this, Manage_Faculty::class.java)

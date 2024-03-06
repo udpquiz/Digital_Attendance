@@ -32,6 +32,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:id="@+id/inputEnroll"
+                android:text="admin@gmail.com"
                 android:background="@drawable/shape"
                 android:drawableLeft="@drawable/baseline_person_24"
                 android:drawablePadding="8dp"
@@ -44,6 +45,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:text="123456"
                 android:id="@+id/inputPassword"
                 android:background="@drawable/shape"
                 android:drawableLeft="@drawable/baseline_person_24"
