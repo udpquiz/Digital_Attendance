@@ -8,7 +8,7 @@ import android.widget.ListView
 import android.widget.Toast
 
 class View_Course : AppCompatActivity() {
-    lateinit var c: Cursor;
+    lateinit var c: Cursor
     lateinit var aa: ArrayAdapter<String>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

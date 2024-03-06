@@ -60,6 +60,10 @@ class LJCRUD(context: Context): SQLiteOpenHelper(context,"LJCRUD",null,5) {
         val db = this.writableDatabase
         return db.rawQuery("select * from $tab_course",null)
     }
+    fun viewsub(sem:String?):Cursor?{
+        val db = this.writableDatabase
+        return db.rawQuery("select * from $tab_course where SEM=?", arrayOf(sem))
+    }
 
     fun insertData(Enrollment_Number:String?,Password:String):Boolean{
         val db = this.writableDatabase
