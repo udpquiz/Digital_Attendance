@@ -6,7 +6,7 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
-class LJCRUD(context: Context): SQLiteOpenHelper(context,"LJCRUD",null,5) {
+class LJCRUD(context: Context): SQLiteOpenHelper(context,"LJ_CRUD",null,6) {
     companion object{
        const val tab_faculty = "faculty"
        const val tab_course = "course"
@@ -17,7 +17,7 @@ class LJCRUD(context: Context): SQLiteOpenHelper(context,"LJCRUD",null,5) {
         db?.execSQL("create table faculty(f_code INTEGER PRIMARY KEY, f_name TEXT, f_email TEXT, f_password TEXT)")
         db?.execSQL("create table course(c_code INTEGER PRIMARY KEY,SEM INTEGER, NAME TEXT)")
         db?.execSQL("create table student_login(Enrollment_Number TEXT PRIMARY KEY,Password TEXT)")
-        db?.execSQL("create table schedule(date TEXT,sem TEXT,division TEXT,start_time TEXT,end_time TEXT,sub_name TEXT,f_name TEXT,room TEXT)")
+        db?.execSQL("create table schedule(schedule_Id INTEGER PRIMARY KEY AUTOINCREMENT ,date TEXT,sem TEXT,division TEXT,start_time TEXT,end_time TEXT,sub_name TEXT,f_name TEXT,room TEXT)")
     }
     fun insertFaculty(f_code: Int, f_name: String, f_email: String, f_password:String): Boolean
     {
@@ -81,11 +81,18 @@ class LJCRUD(context: Context): SQLiteOpenHelper(context,"LJCRUD",null,5) {
         return db.rawQuery("select * from $tab_studentlogin",null)
     }
 
-    fun inserttt(date:String,sem:String,division:String,start_time:String,end_time:String,sub_name:String,f_name:String,room:String):Boolean
+    fun inserttt(
+        date:String,
+        sem:String,
+        division:String,
+        start_time:String,
+        end_time:String,
+        sub_name:String,
+        f_name:String,
+        room:String):Boolean
     {
         val db = this.writableDatabase
         val cv = ContentValues()
-
         cv.put("date",date)
         cv.put("sem",sem)
         cv.put("division",division)
@@ -111,6 +118,8 @@ class LJCRUD(context: Context): SQLiteOpenHelper(context,"LJCRUD",null,5) {
 
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-
+        if(oldVersion<6){
+            db?.execSQL("ALTER TABLE $tab_schedule ADD COLUMN schedule_Id INTEGER PRIMARY KEY AUTOINCREMENT;")
+        }
     }
 }

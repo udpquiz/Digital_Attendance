@@ -5,8 +5,6 @@ import android.content.Intent
 import android.database.Cursor
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
@@ -22,14 +20,13 @@ import java.util.Calendar
 class Add_Schedule : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     lateinit var c:Cursor
     lateinit var c1:Cursor
-    private val course_list: ArrayList<String> = ArrayList()
-    private lateinit var suba: ArrayAdapter<String>
+    lateinit var suba: ArrayAdapter<String>
     private lateinit var date1: TextView
     private var selectedsem=""
     var ab:String=""
     private lateinit var calendar: Calendar
     lateinit var btnsave: Button
-    lateinit var sem1: EditText
+    lateinit var sem1: Spinner
     lateinit var sub: Spinner
     val from = arrayOf("8:00","8:55","9:50","10:45")
     val to = arrayOf("8:50","9:45","10:40","11:35")
@@ -47,12 +44,12 @@ class Add_Schedule : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             faculty_list.add(value)
         }
 
-//        val course_list = ArrayList<String>()
-//        c1 = db.viewsub("3")!!
-//        while (c1.moveToNext()) {
-//            val value = c1.getString(2)
-//            course_list.add(value)
-//        }
+        val course_list = ArrayList<String>()
+        c1 = db.viewsub("3")!!
+        while (c1.moveToNext()) {
+            val value = c1.getString(2)
+            course_list.add(value)
+        }
         println("abey $ab")
 
 
@@ -65,6 +62,7 @@ class Add_Schedule : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 //        val sem1:Spinner=findViewById(R.id.sem)
         sem1=findViewById(R.id.sem)
         sub=findViewById(R.id.sub)
+//        hiii
         val lectures = arrayOf("Lec 1","Lec 2","Lec 3","Lec 4")
         val aroom = arrayOf("110","115","212","215")
         val afaculty = arrayOf("MOG","SKG","VAS","SVR")
@@ -84,30 +82,6 @@ class Add_Schedule : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             showDatePickerDialog()
         }
 
-        sem1.addTextChangedListener(object : TextWatcher{
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                val sem2=s.toString()
-                val course_list = ArrayList<String>()
-                c1 = db.viewsub(sem2)!!
-                while (c1.moveToNext()) {
-                    val value = c1.getString(2)
-                    course_list.add(value)
-                }
-//                Toast.makeText(applicationContext, "$course_list", Toast.LENGTH_SHORT).show()
-                suba= ArrayAdapter<String>(this@Add_Schedule,android.R.layout.select_dialog_item,course_list)
-                sub.setAdapter(suba)
-
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-
-            }
-
-        })
 //        val month = arrayOf("Jan","Feb","Mar","Apr")
 
 
@@ -121,10 +95,10 @@ class Add_Schedule : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         val classa: ArrayAdapter<String> = ArrayAdapter<String>(this,android.R.layout.select_dialog_item,aclass)
         class1.setAdapter(classa)
         val sema: ArrayAdapter<String> = ArrayAdapter<String>(this,android.R.layout.select_dialog_item,asem)
-//        sem1.setAdapter(sema)
-//        val sem = sem1.selectedItem
-        Toast.makeText(this, "$course_list", Toast.LENGTH_SHORT).show()
-
+        sem1.setAdapter(sema)
+        val sem = sem1.selectedItem
+        suba= ArrayAdapter<String>(this,android.R.layout.select_dialog_item,course_list)
+        sub.setAdapter(suba)
         spin_lec.onItemSelectedListener=this
 
         btnsave.setOnClickListener {
@@ -132,9 +106,9 @@ class Add_Schedule : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
             val selectedfac = faculty.selectedItem.toString()
             Log.d("Print","$selectedfac")
-//            selectedsem = sem1.selectedItem.toString()
+            selectedsem = sem1.selectedItem.toString()
             Log.d("Print","$selectedsem")
-            ab=selectedsem
+             ab=selectedsem
             val selecteddiv = class1.selectedItem.toString()
             Log.d("Print","$selecteddiv")
             val selectedsub = sub.selectedItem.toString()
@@ -248,7 +222,7 @@ class Add_Schedule : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
             R.id.sem -> {
 
-                val selectedSemester = sem1.toString()
+                val selectedSemester = sem1.selectedItem.toString()
 
                 val db = LJCRUD(this)
                 val subjectsCursor = db.viewsub(selectedSemester)

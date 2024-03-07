@@ -1,11 +1,7 @@
 package com.example.digital_attendance
 
-import android.database.Cursor
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ArrayAdapter
-import android.widget.ListView
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -33,7 +29,8 @@ class View_Schedule : AppCompatActivity() {
                     c.getString(4),
                     c.getString(5),
                     c.getString(6),
-                    c.getString(7)
+                    c.getString(7),
+                    c.getString(8)
                 )
                 schedules.add(schedule)
                 c.moveToNext()
