@@ -2,19 +2,22 @@ package com.example.digital_attendance
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class View_Schedule : AppCompatActivity() {
     lateinit var recyclerView: RecyclerView
     lateinit var adapter: ScheduleAdapter
+    private lateinit var did:String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_view_schedule)
         recyclerView = findViewById(R.id.r)
         adapter = ScheduleAdapter()
-
-        val sql = LJCRUD(this)
+        val db=LJCRUD1(this)
+        val sql = LJCRUD1(this)
         val c = sql.viewsc()
 
         if (c != null && c.count > 0) {
@@ -30,8 +33,9 @@ class View_Schedule : AppCompatActivity() {
                     c.getString(5),
                     c.getString(6),
                     c.getString(7),
-                    c.getString(8)
                 )
+                did=c.getString(0)
+//                deleteSchedule(did)
                 schedules.add(schedule)
                 c.moveToNext()
             }
@@ -39,9 +43,18 @@ class View_Schedule : AppCompatActivity() {
         } else {
             // Handle case when no records found
         }
-        c?.close()
-
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
     }
+//    fun deleteSchedule(schduleId:String){
+//        val db = LJCRUD(this)
+//        val deletedRows = db.deleteSchedule(did)
+//        if (deletedRows!! > 0) Toast.makeText(
+//            applicationContext,
+//            "Data Deleted",
+//            Toast.LENGTH_LONG
+//        ).show() else Toast.makeText(
+//            applicationContext, "Data not Deleted", Toast.LENGTH_LONG
+//        ).show()
+//    }
 }

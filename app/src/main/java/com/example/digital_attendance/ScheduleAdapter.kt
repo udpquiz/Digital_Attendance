@@ -34,7 +34,6 @@ class ScheduleAdapter: RecyclerView.Adapter<ScheduleAdapter.ViewHolder>() {
 
         fun bind(schedule: Schedule1) {
             textTitle.text =
-                "ID : ${schedule.id}\n"+
                 "Date: ${schedule.date} \nSem: ${schedule.sem}\n Div: ${schedule.division}\nStart Time: ${schedule.start_time}\n" +
                     " End Time: ${schedule.end_time}\n" +
                     " Subject: ${schedule.sub_name}\n" +

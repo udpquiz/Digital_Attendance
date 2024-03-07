@@ -18,7 +18,7 @@ class Add_Course : AppCompatActivity() {
 
         val ADD_COURSE: Button =findViewById(R.id.btn_add_course)
 
-        val sql = LJCRUD(this)
+        val sql = LJCRUD1(this)
 
         ADD_COURSE.setOnClickListener {
             val r:Boolean = sql.addCourse(ADD_C_CODE.text.toString(),ADD_SEM.text.toString(),ADD_NAME.text.toString())
@@ -26,7 +26,7 @@ class Add_Course : AppCompatActivity() {
                 Toast.makeText(this,"Course Added!!", Toast.LENGTH_SHORT).show()
             else
                 Toast.makeText(this,"Course Insertion Failed!!", Toast.LENGTH_SHORT).show()
-            startActivity(Intent(this,Manage_Course::class.java))
+            startActivity(Intent(this,Admin_Dashboard::class.java))
         }
     }
 }

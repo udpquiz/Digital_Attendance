@@ -15,7 +15,7 @@ class View_Course : AppCompatActivity() {
         setContentView(R.layout.activity_view_course)
         val listview: ListView =findViewById(R.id.listView)
 
-        val sql = LJCRUD(this)
+        val sql = LJCRUD1(this)
 
         c = sql.viewCourse()!!
         if(c.getCount() === 0)

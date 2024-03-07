@@ -6,18 +6,19 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
-class LJCRUD(context: Context): SQLiteOpenHelper(context,"LJ_CRUD1",null,8) {
+class LJCRUD1(context: Context): SQLiteOpenHelper(context,"LJJ",null,3) {
     companion object{
-       const val tab_faculty = "faculty"
-       const val tab_course = "course"
+        const val tab_faculty = "faculty"
+        const val tab_course = "course"
         const val tab_studentlogin = "student_login"
-       const val tab_schedule="schedule"
+        const val tab_schedule="schedule11"
+        const val t="schedule1"
     }
     override fun onCreate(db: SQLiteDatabase?) {
         db?.execSQL("create table faculty(f_code INTEGER PRIMARY KEY, f_name TEXT, f_email TEXT, f_password TEXT)")
         db?.execSQL("create table course(c_code INTEGER PRIMARY KEY,SEM INTEGER, NAME TEXT)")
         db?.execSQL("create table student_login(Enrollment_Number TEXT PRIMARY KEY,Password TEXT)")
-        db?.execSQL("create table schedule1(schedule_Id1 INTEGER PRIMARY KEY AUTOINCREMENT,date TEXT,sem TEXT,division TEXT,start_time TEXT,end_time TEXT,sub_name TEXT,f_name TEXT,room TEXT)")
+        db?.execSQL("create table schedule11(date TEXT,sem TEXT,division TEXT,start_time TEXT,end_time TEXT,sub_name TEXT,f_name TEXT,room TEXT)")
     }
     fun insertFaculty(f_code: Int, f_name: String, f_email: String, f_password:String): Boolean
     {
@@ -82,7 +83,6 @@ class LJCRUD(context: Context): SQLiteOpenHelper(context,"LJ_CRUD1",null,8) {
     }
 
     fun inserttt(
-        id:String,
         date:String,
         sem:String,
         division:String,
@@ -94,7 +94,6 @@ class LJCRUD(context: Context): SQLiteOpenHelper(context,"LJ_CRUD1",null,8) {
     {
         val db = this.writableDatabase
         val cv = ContentValues()
-        cv.put("schedule_Id1",id)
         cv.put("date",date)
         cv.put("sem",sem)
         cv.put("division",division)
@@ -117,16 +116,12 @@ class LJCRUD(context: Context): SQLiteOpenHelper(context,"LJ_CRUD1",null,8) {
 //        return db.rawQuery("select * from $TAB where $room=?", arrayOf(room))
         return db.rawQuery("select * from $tab_schedule", null)
     }
- fun deleteSchedule(id: String): Int? {
+    fun deleteSchedule(id: String): Int? {
         val db = this.writableDatabase
         return db.delete(tab_schedule, "schedule_Id = $id", null)
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-//        db?.execSQL("DROP TABLE IF EXISTS $tab_schedule")
-//        db?.execSQL("DROP TABLE IF EXISTS $tab_faculty")
-//        db?.execSQL("DROP TABLE IF EXISTS $tab_course")
-//        db?.execSQL("DROP TABLE IF EXISTS $tab_studentlogin")
-//        onCreate(db)
+
     }
 }

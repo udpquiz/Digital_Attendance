@@ -41,8 +41,8 @@ class Add_Schedule : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         setContentView(R.layout.activity_add_schedule)
 
         val faculty_list = ArrayList<String>()
-        val id = findViewById<EditText>(R.id.id)
-        val db = LJCRUD(this)
+        val id = findViewById<EditText>(R.id.id1)
+        val db = LJCRUD1(this)
         c = db.viewFaculty()!!
 
         while (c.moveToNext()) {
@@ -152,49 +152,6 @@ class Add_Schedule : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             val selectedroom = room.selectedItem.toString()
             Log.d("Print", "$selectedroom")
             val c = db.viewsc()
-
-            if (c != null && c.count > 0) {
-                val schedules = mutableListOf<Schedule1>()
-                c.moveToFirst()
-                while (!c.isAfterLast) {
-                    val schedule = Schedule1(
-                        c.getString(0),
-                        c.getString(1),
-                        c.getString(2),
-                        c.getString(3),
-                        c.getString(4),
-                        c.getString(5),
-                        c.getString(6),
-                        c.getString(7),
-                        c.getString(8)
-                    )
-                    schedules.add(schedule)
-                    c.moveToNext()
-                }
-
-                val lectureExists = schedules.any {
-                    it.date == date1.text.toString() &&
-                            it.sem == selectedsem &&
-                            it.division == selecteddiv &&
-                            it.start_time == efrom.text.toString() &&
-                            it.end_time == eto.text.toString() &&
-                            it.sub_name == selectedsub &&
-                            it.f_name == selectedfac &&
-                            it.room == selectedroom
-                }
-                val faculty_Busy = schedules.any{
-                    it.date == date1.text.toString() &&
-                            it.start_time == efrom.text.toString() &&
-                            it.end_time == eto.text.toString() &&
-                            it.f_name == selectedfac
-                }
-                if (lectureExists) {
-                    Toast.makeText(this, "The Lecture is Already Scheduled", Toast.LENGTH_SHORT).show()
-                }
-                else if(faculty_Busy){
-                    Toast.makeText(this, "Faculty Have Lecture On Same Time", Toast.LENGTH_SHORT).show()
-                }
-                else {
                     val r: Boolean = db.inserttt(
                         date1.text.toString(),
                         selectedsem,
@@ -207,12 +164,11 @@ class Add_Schedule : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                     )
                     if (r == true) {
                         Toast.makeText(this, "Schedule Saved!!!!", Toast.LENGTH_SHORT).show()
-                        startActivity(Intent(this, View_Schedule::class.java))
+                        startActivity(Intent(this, Admin_Dashboard::class.java))
                     } else {
                         Toast.makeText(this, "FAILED ????", Toast.LENGTH_SHORT).show()
                     }
-                }
-            }
+
         }
     }
 
@@ -230,7 +186,6 @@ class Add_Schedule : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         )
         datePickerDialog.show()
     }
-
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         val spinner = parent as Spinner
         val selectedItem = spinner.selectedItem.toString()
@@ -281,7 +236,7 @@ class Add_Schedule : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
             R.id.sem -> {
                 val selectedSemester = sem1.toString()
-                val db = LJCRUD(this)
+                val db = LJCRUD1(this)
                 val subjectsCursor = db.viewsub(selectedSemester)
                 val courseList = ArrayList<String>()
                 subjectsCursor?.let {

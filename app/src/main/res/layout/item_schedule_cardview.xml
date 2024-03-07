@@ -20,6 +20,18 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
+        <Button
+            android:id="@+id/delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="200dp"
+            android:backgroundTint="@color/white"
+            android:onClick="deleteSchedule"
+            android:text="Delete"
+            android:textColor="#FF0000"
+            android:textSize="13dp"></Button>
+
+
         <!-- Add more TextViews for other data fields as needed -->
 
     </LinearLayout>

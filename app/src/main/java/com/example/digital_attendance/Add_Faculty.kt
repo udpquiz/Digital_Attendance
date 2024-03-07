@@ -19,7 +19,7 @@ class Add_Faculty : AppCompatActivity() {
         val edfemail: EditText =findViewById(R.id.ed_f_email)
         val edfpassword: EditText =findViewById(R.id.ed_f_password)
 
-        val sql = LJCRUD(this)
+        val sql = LJCRUD1(this)
 
 
         btnadd.setOnClickListener {
@@ -28,7 +28,7 @@ class Add_Faculty : AppCompatActivity() {
             if (r == true)
             {
                 Toast.makeText(this, " Faculty added ",Toast.LENGTH_SHORT).show()
-                startActivity(Intent(this,Manage_Faculty::class.java))
+                startActivity(Intent(this,Admin_Dashboard::class.java))
             }
             else{
                 Toast.makeText(this, "Faculty add failed", Toast.LENGTH_SHORT).show()
