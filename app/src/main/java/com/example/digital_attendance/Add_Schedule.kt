@@ -5,6 +5,8 @@ import android.content.Intent
 import android.database.Cursor
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
@@ -18,58 +20,60 @@ import android.widget.Toast
 import java.util.Calendar
 
 class Add_Schedule : AppCompatActivity(), AdapterView.OnItemSelectedListener {
-    lateinit var c:Cursor
-    lateinit var c1:Cursor
+
+    lateinit var c: Cursor
+    lateinit var c1: Cursor
     lateinit var suba: ArrayAdapter<String>
     private lateinit var date1: TextView
-    private var selectedsem=""
-    var ab:String=""
+    private var selectedsem = ""
+    var ab: String = ""
     private lateinit var calendar: Calendar
     lateinit var btnsave: Button
-    lateinit var sem1: Spinner
+    lateinit var sem1: EditText
     lateinit var sub: Spinner
-    val from = arrayOf("8:00","8:55","9:50","10:45")
-    val to = arrayOf("8:50","9:45","10:40","11:35")
+    val from = arrayOf("8:00", "8:55", "9:50", "10:45")
+    val to = arrayOf("8:50", "9:45", "10:40", "11:35")
     lateinit var efrom: EditText
     lateinit var eto: EditText
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_schedule)
 
         val faculty_list = ArrayList<String>()
-        val db=LJCRUD(this)
+        val id = findViewById<EditText>(R.id.id)
+        val db = LJCRUD(this)
         c = db.viewFaculty()!!
+
         while (c.moveToNext()) {
             val value = c.getString(1)
             faculty_list.add(value)
         }
 
         val course_list = ArrayList<String>()
-        c1 = db.viewsub("3")!!
+        c1 = db.viewsub("4")!!
+
         while (c1.moveToNext()) {
             val value = c1.getString(2)
             course_list.add(value)
         }
-        println("abey $ab")
 
+        efrom = findViewById(R.id.efrom)
+        eto = findViewById(R.id.eto)
 
-        efrom=findViewById(R.id.efrom)
-        eto=findViewById(R.id.eto)
-        val spin_lec:Spinner=findViewById(R.id.spin_lec)
-        val room:Spinner=findViewById(R.id.room)
-        val faculty:Spinner=findViewById(R.id.faculty)
-        val class1:Spinner=findViewById(R.id.class1)
-//        val sem1:Spinner=findViewById(R.id.sem)
-        sem1=findViewById(R.id.sem)
-        sub=findViewById(R.id.sub)
-//        hiii
-        val lectures = arrayOf("Lec 1","Lec 2","Lec 3","Lec 4")
-        val aroom = arrayOf("110","115","212","215")
-        val afaculty = arrayOf("MOG","SKG","VAS","SVR")
-        val asub = arrayOf("UDP","WDT","FCO","IDP")
-        val aclass = arrayOf("ICA-A","ICA-B","ICA-C","ICA-D")
-        val asem = arrayOf("1","2","3","4")
-        btnsave=findViewById(R.id.btnsave)
+        val spin_lec: Spinner = findViewById(R.id.spin_lec)
+        val room: Spinner = findViewById(R.id.room)
+        val faculty: Spinner = findViewById(R.id.faculty)
+        val class1: Spinner = findViewById(R.id.class1)
+        sem1 = findViewById(R.id.sem)
+        sub = findViewById(R.id.sub)
+
+        val lectures = arrayOf("Lec 1", "Lec 2", "Lec 3", "Lec 4")
+        val aroom = arrayOf("110", "115", "212", "215")
+        val aclass = arrayOf("ICA-A", "ICA-B", "ICA-C", "ICA-D")
+        val asem = arrayOf("1", "2", "3", "4")
+
+        btnsave = findViewById(R.id.btnsave)
         date1 = findViewById(R.id.date1)
         calendar = Calendar.getInstance()
         val year = calendar.get(Calendar.YEAR)
@@ -77,60 +81,142 @@ class Add_Schedule : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         val dayOfmonth = calendar.get(Calendar.DAY_OF_MONTH)
         val dayOfMonth = dayOfmonth + 1
         calendar.add(Calendar.DAY_OF_MONTH, 1)
-        date1.text="$dayOfMonth/$month/$year"
+        date1.text = "$dayOfMonth/$month/$year"
         date1.setOnClickListener {
             showDatePickerDialog()
         }
 
-//        val month = arrayOf("Jan","Feb","Mar","Apr")
+        sem1.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val sem2=s.toString()
+                val course_list = ArrayList<String>()
+                c1 = db.viewsub(sem2)!!
+                while (c1.moveToNext()) {
+                    val value = c1.getString(2)
+                    course_list.add(value)
+                }
+//                Toast.makeText(applicationContext, "$course_list", Toast.LENGTH_SHORT).show()
+                suba= ArrayAdapter<String>(this@Add_Schedule,android.R.layout.select_dialog_item,course_list)
+                sub.setAdapter(suba)
+
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+
+        })
 
 
-
-        val sl: ArrayAdapter<String> = ArrayAdapter<String>(this,android.R.layout.select_dialog_item,lectures)
+        val sl: ArrayAdapter<String> =
+            ArrayAdapter<String>(this, android.R.layout.select_dialog_item, lectures)
         spin_lec.setAdapter(sl)
-        val rooma: ArrayAdapter<String> = ArrayAdapter<String>(this,android.R.layout.select_dialog_item,aroom)
+
+        val rooma: ArrayAdapter<String> =
+            ArrayAdapter<String>(this, android.R.layout.select_dialog_item, aroom)
         room.setAdapter(rooma)
-        val faca: ArrayAdapter<String> = ArrayAdapter<String>(this,android.R.layout.select_dialog_item,faculty_list)
+
+        val faca: ArrayAdapter<String> =
+            ArrayAdapter<String>(this, android.R.layout.select_dialog_item, faculty_list)
         faculty.setAdapter(faca)
-        val classa: ArrayAdapter<String> = ArrayAdapter<String>(this,android.R.layout.select_dialog_item,aclass)
+
+        val classa: ArrayAdapter<String> =
+            ArrayAdapter<String>(this, android.R.layout.select_dialog_item, aclass)
         class1.setAdapter(classa)
-        val sema: ArrayAdapter<String> = ArrayAdapter<String>(this,android.R.layout.select_dialog_item,asem)
-        sem1.setAdapter(sema)
-        val sem = sem1.selectedItem
-        suba= ArrayAdapter<String>(this,android.R.layout.select_dialog_item,course_list)
-        sub.setAdapter(suba)
-        spin_lec.onItemSelectedListener=this
+
+        val sema: ArrayAdapter<String> =
+            ArrayAdapter<String>(this, android.R.layout.select_dialog_item, asem)
+//        sem1.setAdapter(sema)
+
+//        val sem = sem1.selectedItem
+//        suba = ArrayAdapter<String>(this, android.R.layout.select_dialog_item, course_list)
+//        sub.setAdapter(suba)
+
+        spin_lec.onItemSelectedListener = this
 
         btnsave.setOnClickListener {
-
-
             val selectedfac = faculty.selectedItem.toString()
-            Log.d("Print","$selectedfac")
-            selectedsem = sem1.selectedItem.toString()
-            Log.d("Print","$selectedsem")
-             ab=selectedsem
+            Log.d("Print", "$selectedfac")
+//            selectedsem = sem1.selectedItem.toString()
+            Log.d("Print", "$selectedsem")
+            ab = selectedsem
+            println("Ab : $ab")
             val selecteddiv = class1.selectedItem.toString()
-            Log.d("Print","$selecteddiv")
+            Log.d("Print", "$selecteddiv")
             val selectedsub = sub.selectedItem.toString()
-            Log.d("Print","$selectedsub")
+            Log.d("Print", "$selectedsub")
             val selectedroom = room.selectedItem.toString()
-            Log.d("Print","$selectedroom")
+            Log.d("Print", "$selectedroom")
+            val c = db.viewsc()
 
-            val r:Boolean=db.inserttt(date1.text.toString(),selectedsem,selecteddiv,efrom.text.toString(),eto.text.toString(),selectedsub,selectedfac,selectedroom)
-            if (r == true)
-            {
-                Toast.makeText(this, "Schedule Saved!!!!", Toast.LENGTH_SHORT).show()
-                startActivity(Intent(this,View_Schedule::class.java))
-            }
-            else{
-                Toast.makeText(this, "FAILED ????", Toast.LENGTH_SHORT).show()
-            }
+            if (c != null && c.count > 0) {
+                val schedules = mutableListOf<Schedule1>()
+                c.moveToFirst()
+                while (!c.isAfterLast) {
+                    val schedule = Schedule1(
+                        c.getString(0),
+                        c.getString(1),
+                        c.getString(2),
+                        c.getString(3),
+                        c.getString(4),
+                        c.getString(5),
+                        c.getString(6),
+                        c.getString(7),
+                        c.getString(8)
+                    )
+                    schedules.add(schedule)
+                    c.moveToNext()
+                }
 
+                val lectureExists = schedules.any {
+                    it.date == date1.text.toString() &&
+                            it.sem == selectedsem &&
+                            it.division == selecteddiv &&
+                            it.start_time == efrom.text.toString() &&
+                            it.end_time == eto.text.toString() &&
+                            it.sub_name == selectedsub &&
+                            it.f_name == selectedfac &&
+                            it.room == selectedroom
+                }
+                val faculty_Busy = schedules.any{
+                    it.date == date1.text.toString() &&
+                            it.start_time == efrom.text.toString() &&
+                            it.end_time == eto.text.toString() &&
+                            it.f_name == selectedfac
+                }
+                if (lectureExists) {
+                    Toast.makeText(this, "The Lecture is Already Scheduled", Toast.LENGTH_SHORT).show()
+                }
+                else if(faculty_Busy){
+                    Toast.makeText(this, "Faculty Have Lecture On Same Time", Toast.LENGTH_SHORT).show()
+                }
+                else {
+                    val r: Boolean = db.inserttt(
+                        date1.text.toString(),
+                        selectedsem,
+                        selecteddiv,
+                        efrom.text.toString(),
+                        eto.text.toString(),
+                        selectedsub,
+                        selectedfac,
+                        selectedroom
+                    )
+                    if (r == true) {
+                        Toast.makeText(this, "Schedule Saved!!!!", Toast.LENGTH_SHORT).show()
+                        startActivity(Intent(this, View_Schedule::class.java))
+                    } else {
+                        Toast.makeText(this, "FAILED ????", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
         }
-
-
     }
-    fun showDatePickerDialog(){
+
+    fun showDatePickerDialog() {
         val datePickerDialog = DatePickerDialog(
             this,
             { _: DatePicker, year: Int, month: Int, dayOfMonth: Int ->
@@ -145,35 +231,9 @@ class Add_Schedule : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         datePickerDialog.show()
     }
 
-
-
-    //    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-//        val i = parent?.getItemAtPosition(position)
-////        Toast.makeText(this, "$i", Toast.LENGTH_SHORT).show()
-//        when (i) {
-//            "Lec 1" -> {
-//                efrom.setText(from[0])
-//                eto.setText(to[0])
-//            }
-//            "Lec 2" -> {
-//                efrom.setText(from[1])
-//                eto.setText(to[1])
-//            }
-//            "Lec 3" -> {
-//                efrom.setText(from[2])
-//                eto.setText(to[2])
-//            }
-//            "3" -> {
-//                efrom.setText(from[3])
-//                eto.setText(to[3])
-//            }
-//        }
-//
-//    }
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         val spinner = parent as Spinner
         val selectedItem = spinner.selectedItem.toString()
-
         when (spinner.id) {
             R.id.spin_lec -> {
                 // Handle selection for spin_lec spinner
@@ -208,49 +268,41 @@ class Add_Schedule : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
             R.id.faculty -> {
                 // Handle selection for faculty spinner
-                Toast.makeText(this, "Selected Faculty: $selectedItem", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Selected Faculty: $selectedItem", Toast.LENGTH_SHORT)
+                    .show()
                 println(selectedItem)
-
             }
 
             R.id.class1 -> {
                 // Handle selection for class1 spinner
                 Toast.makeText(this, "Selected Class: $selectedItem", Toast.LENGTH_SHORT).show()
                 println(selectedItem)
-
             }
 
             R.id.sem -> {
-
-                val selectedSemester = sem1.selectedItem.toString()
-
+                val selectedSemester = sem1.toString()
                 val db = LJCRUD(this)
                 val subjectsCursor = db.viewsub(selectedSemester)
                 val courseList = ArrayList<String>()
-
                 subjectsCursor?.let {
                     while (it.moveToNext()) {
                         val value = it.getString(2)
                         courseList.add(value)
                     }
                 }
-
-                val subAdapter = ArrayAdapter<String>(this, android.R.layout.select_dialog_item, courseList)
+                val subAdapter =
+                    ArrayAdapter(this, android.R.layout.select_dialog_item, courseList)
                 sub.setAdapter(subAdapter)
             }
 
-
             R.id.sub -> {
                 // Handle selection for sub spinner
-                Toast.makeText(this, "Selected Subject: $selectedItem", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Selected Subject: $selectedItem", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
-
     }
 
-
-
     override fun onNothingSelected(parent: AdapterView<*>?) {
-
     }
 }
