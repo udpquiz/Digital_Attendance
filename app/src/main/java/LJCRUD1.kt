@@ -6,7 +6,7 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
-class LJCRUD1(context: Context): SQLiteOpenHelper(context,"LJJ",null,3) {
+class LJCRUD1(context: Context): SQLiteOpenHelper(context,"LJ_Crud",null,4) {
     companion object{
         const val tab_faculty = "faculty"
         const val tab_course = "course"
@@ -18,7 +18,7 @@ class LJCRUD1(context: Context): SQLiteOpenHelper(context,"LJJ",null,3) {
         db?.execSQL("create table faculty(f_code INTEGER PRIMARY KEY, f_name TEXT, f_email TEXT, f_password TEXT)")
         db?.execSQL("create table course(c_code INTEGER PRIMARY KEY,SEM INTEGER, NAME TEXT)")
         db?.execSQL("create table student_login(Enrollment_Number TEXT PRIMARY KEY,Password TEXT)")
-        db?.execSQL("create table schedule11(date TEXT,sem TEXT,division TEXT,start_time TEXT,end_time TEXT,sub_name TEXT,f_name TEXT,room TEXT)")
+        db?.execSQL("create table schedule11(schedule_id INTEGER PRIMARY KEY AUTOINCREMENT ,date TEXT,sem TEXT,division TEXT,start_time TEXT,end_time TEXT,sub_name TEXT,f_name TEXT,room TEXT)")
     }
     fun insertFaculty(f_code: Int, f_name: String, f_email: String, f_password:String): Boolean
     {

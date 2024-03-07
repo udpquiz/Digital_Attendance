@@ -141,7 +141,7 @@ class Add_Schedule : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         btnsave.setOnClickListener {
             val selectedfac = faculty.selectedItem.toString()
             Log.d("Print", "$selectedfac")
-//            selectedsem = sem1.selectedItem.toString()
+            selectedsem = sem1.text.toString()
             Log.d("Print", "$selectedsem")
             ab = selectedsem
             println("Ab : $ab")
@@ -152,9 +152,51 @@ class Add_Schedule : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             val selectedroom = room.selectedItem.toString()
             Log.d("Print", "$selectedroom")
             val c = db.viewsc()
+            if (c != null && c.count > 0) {
+                val schedules = mutableListOf<Schedule1>()
+                c.moveToFirst()
+                while (!c.isAfterLast) {
+                    val schedule = Schedule1(
+                        c.getString(0),
+                        c.getString(1),
+                        c.getString(2),
+                        c.getString(3),
+                        c.getString(4),
+                        c.getString(5),
+                        c.getString(6),
+                        c.getString(7),
+                        c.getString(8),
+                    )
+                    schedules.add(schedule)
+                    c.moveToNext()
+                }
+                val lectureExists = schedules.any {
+                    it.date == date1.text.toString() &&
+                            it.sem == selectedsem &&
+                            it.division == selecteddiv &&
+                            it.start_time == efrom.text.toString() &&
+                            it.end_time == eto.text.toString() &&
+                            it.sub_name == selectedsub &&
+                            it.f_name == selectedfac &&
+                            it.room == selectedroom
+                }
+                val faculty_Busy = schedules.any{
+                    it.date == date1.text.toString() &&
+                            it.start_time == efrom.text.toString() &&
+                            it.end_time == eto.text.toString() &&
+                            it.f_name == selectedfac
+                }
+                if (lectureExists) {
+                    Toast.makeText(this, "The Lecture is Already Scheduled", Toast.LENGTH_SHORT)
+                        .show()
+                }
+                else if(faculty_Busy){
+                    Toast.makeText(this, "Faculty Have Lecture On Same Time", Toast.LENGTH_SHORT).show()
+                }
+                else {
                     val r: Boolean = db.inserttt(
                         date1.text.toString(),
-                        selectedsem,
+                        sem1.text.toString(),
                         selecteddiv,
                         efrom.text.toString(),
                         eto.text.toString(),
@@ -168,7 +210,8 @@ class Add_Schedule : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                     } else {
                         Toast.makeText(this, "FAILED ????", Toast.LENGTH_SHORT).show()
                     }
-
+                }
+            }
         }
     }
 
