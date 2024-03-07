@@ -62,7 +62,6 @@ class Add_Schedule : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 //        val sem1:Spinner=findViewById(R.id.sem)
         sem1=findViewById(R.id.sem)
         sub=findViewById(R.id.sub)
-//        hiii
         val lectures = arrayOf("Lec 1","Lec 2","Lec 3","Lec 4")
         val aroom = arrayOf("110","115","212","215")
         val afaculty = arrayOf("MOG","SKG","VAS","SVR")
