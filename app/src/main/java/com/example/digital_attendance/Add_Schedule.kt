@@ -302,7 +302,6 @@ class Add_Schedule : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             }
         }
     }
-
     override fun onNothingSelected(parent: AdapterView<*>?) {
     }
 }
