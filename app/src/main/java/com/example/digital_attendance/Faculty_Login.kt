@@ -21,7 +21,7 @@ class Faculty_Login : AppCompatActivity() {
             startActivity(i)
         }
 
-        val sql = LJCRUD(this)
+        val sql = LJCRUD1(this)
 
         val uname: EditText = findViewById(R.id.input_admin_uname)
         val password: EditText = findViewById(R.id.input_password)
@@ -40,7 +40,7 @@ class Faculty_Login : AppCompatActivity() {
                         val storedPassword = c.getString(3)
                         val email = c.getString(2)
 
-                        b.putString("email", email)
+                        b.putString("F_code", storedUsername)
                         if (uname.text.toString() == storedUsername && password.text.toString() == storedPassword) {
                             // Successful login
                             android.widget.Toast.makeText(this, "Successful", Toast.LENGTH_SHORT)

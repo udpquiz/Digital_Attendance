@@ -3,11 +3,13 @@ package com.example.digital_attendance
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class ScheduleAdapter: RecyclerView.Adapter<ScheduleAdapter.ViewHolder>() {
+class ScheduleAdapter : RecyclerView.Adapter<ScheduleAdapter.ViewHolder>() {
     private var data: List<Schedule1> = ArrayList()
+    private var onDeleteClickListener: ((String) -> Unit)? = null
 
     fun setData(data: List<Schedule1>) {
         this.data = data
@@ -28,19 +30,28 @@ class ScheduleAdapter: RecyclerView.Adapter<ScheduleAdapter.ViewHolder>() {
         return data.size
     }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    fun setOnDeleteClickListener(listener: (String) -> Unit) {
+        onDeleteClickListener = listener
+    }
+
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val textTitle: TextView = itemView.findViewById(R.id.textTitle)
-        // Bind other TextViews here for other data fields
+        private val btnDelete: Button = itemView.findViewById(R.id.delete)
+
+        init {
+            btnDelete.setOnClickListener {
+                onDeleteClickListener?.invoke(data[adapterPosition].id)
+            }
+        }
 
         fun bind(schedule: Schedule1) {
             textTitle.text =
-                "ID : ${schedule.id}\n"+
-                "Date: ${schedule.date} \nSem: ${schedule.sem}\n Div: ${schedule.division}\nStart Time: ${schedule.start_time}\n" +
-                    " End Time: ${schedule.end_time}\n" +
-                    " Subject: ${schedule.sub_name}\n" +
-                    " Faculty: ${schedule.f_name}\n" +
-                    " Room: ${schedule.room}" // Modify according to your data fields
-            // Bind other data fields similarly
+                "ID : ${schedule.id}\n" +
+                        "Date: ${schedule.date} \nSem: ${schedule.sem}\n Div: ${schedule.division}\nStart Time: ${schedule.start_time}\n" +
+                        " End Time: ${schedule.end_time}\n" +
+                        " Subject: ${schedule.sub_name}\n" +
+                        " Faculty: ${schedule.f_name}\n" +
+                        " Room: ${schedule.room}"
         }
     }
 }

@@ -36,7 +36,6 @@ class View_Schedule : AppCompatActivity() {
                     c.getString(8),
 
                 )
-                did=c.getString(0)
 //                deleteSchedule(did)
                 schedules.add(schedule)
                 c.moveToNext()
@@ -47,16 +46,46 @@ class View_Schedule : AppCompatActivity() {
         }
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
+        adapter.setOnDeleteClickListener { scheduleId ->
+            deleteSchedule(scheduleId)
     }
-//    fun deleteSchedule(schduleId:String){
-//        val db = LJCRUD(this)
-//        val deletedRows = db.deleteSchedule(did)
-//        if (deletedRows!! > 0) Toast.makeText(
-//            applicationContext,
-//            "Data Deleted",
-//            Toast.LENGTH_LONG
-//        ).show() else Toast.makeText(
-//            applicationContext, "Data not Deleted", Toast.LENGTH_LONG
-//        ).show()
-//    }
+}
+    private fun deleteSchedule(scheduleId: String) {
+        val db = LJCRUD1(this)
+        val deletedRows = db.deleteSchedule(scheduleId)
+        if (deletedRows!! > 0) {
+            Toast.makeText(applicationContext, "Data Deleted", Toast.LENGTH_LONG).show()
+            // Refresh the RecyclerView after deletion
+            refreshRecyclerView()
+        } else {
+            Toast.makeText(applicationContext, "Data not Deleted", Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun refreshRecyclerView() {
+        val c = LJCRUD1(this).viewsc()
+        if (c != null && c.count > 0) {
+            val schedules = mutableListOf<Schedule1>()
+            c.moveToFirst()
+            while (!c.isAfterLast) {
+                val schedule = Schedule1(
+                    c.getString(0),
+                    c.getString(1),
+                    c.getString(2),
+                    c.getString(3),
+                    c.getString(4),
+                    c.getString(5),
+                    c.getString(6),
+                    c.getString(7),
+                    c.getString(8)
+                )
+                schedules.add(schedule)
+                c.moveToNext()
+            }
+            adapter.setData(schedules)
+        } else {
+            adapter.setData(emptyList())
+            // Handle case when no records found
+        }
+    }
 }
