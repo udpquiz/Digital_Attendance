@@ -249,6 +249,8 @@ class Add_Schedule : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             calendar.get(Calendar.MONTH),
             calendar.get(Calendar.DAY_OF_MONTH)
         )
+// maaz
+        datePickerDialog.datePicker.minDate = System.currentTimeMillis() - 1000
         datePickerDialog.show()
     }
 
