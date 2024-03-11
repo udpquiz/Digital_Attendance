@@ -15,7 +15,7 @@ class View_Schedule : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_view_schedule)
         recyclerView = findViewById(R.id.r)
-        adapter = ScheduleAdapter()
+        adapter = ScheduleAdapter(this)
         val db=LJCRUD1(this)
         val sql = LJCRUD1(this)
         val c = sql.viewsc()
@@ -42,6 +42,7 @@ class View_Schedule : AppCompatActivity() {
             }
             adapter.setData(schedules)
         } else {
+            Toast.makeText(this, "No Records Available", Toast.LENGTH_SHORT).show()
             // Handle case when no records found
         }
         recyclerView.adapter = adapter
