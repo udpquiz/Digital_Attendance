@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Digital_Attendance"
         tools:targetApi="31">
         <activity
+            android:name=".ScheduleUpdateActivity"
+            android:exported="false" />
+        <activity
             android:name=".View_Schedule"
             android:exported="false" />
         <activity

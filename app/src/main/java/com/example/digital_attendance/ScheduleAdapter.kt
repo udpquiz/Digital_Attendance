@@ -1,5 +1,7 @@
 package com.example.digital_attendance
 
+import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,7 +9,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class ScheduleAdapter : RecyclerView.Adapter<ScheduleAdapter.ViewHolder>() {
+class ScheduleAdapter(private val context: Context) : RecyclerView.Adapter<ScheduleAdapter.ViewHolder>() {
     private var data: List<Schedule1> = ArrayList()
     private var onDeleteClickListener: ((String) -> Unit)? = null
 
@@ -24,6 +26,13 @@ class ScheduleAdapter : RecyclerView.Adapter<ScheduleAdapter.ViewHolder>() {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val schedule = data[position]
         holder.bind(schedule)
+
+        holder.itemView.setOnClickListener {
+            // Open ScheduleUpdateActivity with the selected schedule data
+            val intent = Intent(context, ScheduleUpdateActivity::class.java)
+            intent.putExtra("schedule", schedule) // Pass the selected schedule object
+            context.startActivity(intent)
+        }
     }
 
     override fun getItemCount(): Int {

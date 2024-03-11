@@ -120,6 +120,25 @@ class LJCRUD1(context: Context): SQLiteOpenHelper(context,"LJ_Crud",null,4) {
         val db = this.writableDatabase
         return db.delete(tab_schedule, "schedule_Id = $id", null)
     }
+    fun updateSchedule(schedule: Schedule1): Boolean {
+        val db = this.writableDatabase
+        val cv = ContentValues()
+
+        cv.put("date", schedule.date)
+        cv.put("sem", schedule.sem)
+        cv.put("division", schedule.division)
+        cv.put("start_time", schedule.start_time)
+        cv.put("end_time", schedule.end_time)
+        cv.put("sub_name", schedule.sub_name)
+        cv.put("f_name", schedule.f_name)
+        cv.put("room", schedule.room)
+
+        val whereClause = "schedule_id = ?"
+        val whereArgs = arrayOf(schedule.id)
+        val updatedRows = db.update(tab_schedule, cv, whereClause, whereArgs)
+
+        return updatedRows > 0
+    }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
 
