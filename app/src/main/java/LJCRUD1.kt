@@ -120,6 +120,10 @@ class LJCRUD1(context: Context): SQLiteOpenHelper(context,"LJ_Crud",null,4) {
         val db = this.writableDatabase
         return db.delete(tab_schedule, "schedule_Id = $id", null)
     }
+    fun faculty_schedule(name:String):Cursor?{
+        val db = this.writableDatabase
+        return db.rawQuery("Select * from $tab_schedule where F_NAME='$name'",null)
+    }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
 

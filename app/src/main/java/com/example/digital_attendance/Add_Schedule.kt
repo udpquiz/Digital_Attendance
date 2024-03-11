@@ -193,7 +193,7 @@ class Add_Schedule : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                 else if(faculty_Busy){
                     Toast.makeText(this, "Faculty Have Lecture On Same Time", Toast.LENGTH_SHORT).show()
                 }
-                else {
+                else{
                     val r: Boolean = db.inserttt(
                         date1.text.toString(),
                         sem1.text.toString(),

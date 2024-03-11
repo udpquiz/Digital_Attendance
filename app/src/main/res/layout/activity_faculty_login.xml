@@ -35,20 +35,21 @@
                 android:background="@drawable/shape"
                 android:drawableLeft="@drawable/baseline_person_24"
                 android:drawablePadding="8dp"
-                android:hint="Faculty Code."
                 android:padding="8dp"
                 android:textColor="@color/black"
+                android:text="1010"
                 android:textColorHighlight="@color/cardview_dark_background"
                 android:layout_marginTop="40dp"/>
 
             <EditText
                 android:id="@+id/input_faculty_password"
                 android:layout_width="match_parent"
+                android:text="123456"
                 android:layout_height="50dp"
                 android:background="@drawable/shape"
                 android:drawableLeft="@drawable/baseline_person_24"
                 android:drawablePadding="8dp"
-                android:hint="Password"
+
                 android:padding="8dp"
                 android:inputType="textPassword"
                 android:textColor="@color/black"

@@ -6,9 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".Faculty_Page">
     <TextView
-        android:id="@+id/faculty_id"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Faculty Page"></TextView>
+        android:id="@+id/faculty_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </TextView>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible" />
 </androidx.constraintlayout.widget.ConstraintLayout>
