@@ -6,8 +6,6 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat.startActivity
-import com.example.digital_attendance.Student_Page
 import com.opencsv.CSVReader
 import java.io.InputStreamReader
 
@@ -23,7 +21,7 @@ class Student_Login : AppCompatActivity() {
         val btn = findViewById<Button>(R.id.login_BTtn)
         val mp = LJCRUD1(this)
 
-        val inputStream = assets.open("data.csv")
+        val inputStream = assets.open("ICA_A.csv")
 
         inputStream.use {
             val csvReader = CSVReader(InputStreamReader(it))

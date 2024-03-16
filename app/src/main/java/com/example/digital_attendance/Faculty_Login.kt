@@ -37,10 +37,12 @@ class Faculty_Login : AppCompatActivity() {
 
                     do {
                         val storedUsername = c.getString(0)
+                        val storedname = c.getString(1)
                         val storedPassword = c.getString(3)
                         val email = c.getString(2)
 
                         b.putString("F_code", storedUsername)
+                        b.putString("F_Name", storedname)
                         if (uname.text.toString() == storedUsername && password.text.toString() == storedPassword) {
                             // Successful login
                             android.widget.Toast.makeText(this, "Successful", Toast.LENGTH_SHORT)

@@ -80,7 +80,6 @@ class ScheduleUpdateActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
                     val value = c1.getString(2)
                     course_list.add(value)
                 }
-//                Toast.makeText(applicationContext, "$course_list", Toast.LENGTH_SHORT).show()
                 suba = ArrayAdapter<String>(
                     this@ScheduleUpdateActivity,
                     android.R.layout.select_dialog_item,
@@ -110,7 +109,7 @@ class ScheduleUpdateActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
         val roomData = arrayOf("Lab-1","Lab-2","Lab-3","110", "105", "212","215",) // Replace with actual room data
 //        val subData = arrayOf("Subject1", "Subject2", "Subject3") // Replace with actual subject data
 //        val facultyData = arrayOf("Faculty1", "Faculty2", "Faculty3") // Replace with actual faculty data
-        val classData = arrayOf("ICA-A","ICA-B","ICA-C","ICA-D","ICA-E") // Replace with actual class data
+        val classData = arrayOf("ICA_A","ICA_B","ICA_C","ICA_D","ICA_E") // Replace with actual class data
 
 //        populateSpinner(roomSpinner, roomData)
 //        populateSpinner(subSpinner, subData)
