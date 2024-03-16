@@ -4,15 +4,65 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="View_Faculty">
+    tools:context=".View_Faculty">
 
-    <ListView
-        android:id="@+id/lv_f"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <TableRow
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/headCode"
+                android:layout_width="55dp"
+                android:layout_height="wrap_content"
+                android:text="@string/code"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/headName"
+                android:layout_width="113dp"
+                android:layout_height="wrap_content"
+                android:text="@string/name"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/headEmail"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:text="@string/email"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/headPassword"
+                android:layout_width="122dp"
+                android:layout_height="wrap_content"
+                android:paddingStart="8dp"
+                android:text="@string/password"
+                android:textAlignment="center" />
+
+        </TableRow>
+    </TableLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="657dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/faculty_recycler_view" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
