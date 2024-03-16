@@ -38,7 +38,7 @@ class Faculty_Page : AppCompatActivity() {
                      storedname = storename
                      new2 = storedname
                     println(storedname)
-                    Toast.makeText(this,"$storedname",Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(this,"$storedname",Toast.LENGTH_SHORT).show()
                 }
             }
             while(c.moveToNext())
@@ -48,7 +48,7 @@ class Faculty_Page : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
         adapter = Schedule2()
         recyclerView.adapter = adapter
-        c1 = db.faculty_schedule(new2)!!
+        c1 = db. faculty_schedule(new2)!!
         c1.moveToFirst()
         while (!c1.isAfterLast) {
             adapter.addSchedule(
@@ -63,6 +63,3 @@ class Faculty_Page : AppCompatActivity() {
 //        listview.adapter=aa
     }
 }
-
-//Downlaod Git Dekstop
-//Github ki website

@@ -55,12 +55,12 @@ class ScheduleAdapter(private val context: Context) : RecyclerView.Adapter<Sched
 
         fun bind(schedule: Schedule1) {
             textTitle.text =
-                "ID : ${schedule.id}\n" +
-                        "Date: ${schedule.date} \nSem: ${schedule.sem}\n Div: ${schedule.division}\nStart Time: ${schedule.start_time}\n" +
-                        " End Time: ${schedule.end_time}\n" +
-                        " Subject: ${schedule.sub_name}\n" +
-                        " Faculty: ${schedule.f_name}\n" +
-                        " Room: ${schedule.room}"
+                "ID : ${schedule.id}\n"+
+                        "Date: ${schedule.date} \nSem: ${schedule.sem}\nDiv: ${schedule.division}\nStart Time: ${schedule.start_time}\n"+
+                        "End Time: ${schedule.end_time}\n" +
+                        "Subject: ${schedule.sub_name}\n" +
+                        "Faculty: ${schedule.f_name}\n" +
+                        "Room: ${schedule.room}"
         }
     }
 }
