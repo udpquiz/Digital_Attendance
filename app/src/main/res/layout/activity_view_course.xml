@@ -6,15 +6,72 @@
     android:layout_height="match_parent"
     tools:context=".View_Course">
 
+    <TableLayout
+        android:id="@+id/tableLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <ListView
-        android:id="@+id/listView"
-        android:layout_width="335dp"
-        android:layout_height="502dp"
+    </TableLayout>
+
+    <TableRow
+        android:id="@+id/course_header"
+        android:layout_width="375dp"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.555"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5" />
+        app:layout_constraintVertical_bias="0.044">
+
+        <TextView
+            android:id="@+id/headCode"
+            android:layout_width="125dp"
+            android:layout_height="match_parent"
+            android:text="@string/code"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/headName"
+            android:layout_width="125dp"
+            android:layout_height="wrap_content"
+            android:text="@string/c_name"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/headSem"
+            android:layout_width="125dp"
+            android:layout_height="match_parent"
+            android:text="@string/sem"
+            android:textAlignment="center" />
+
+    </TableRow>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/c_recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="657dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.783"
+        tools:listitem="@layout/item_course_cardview" />
+    <!--    <ListView-->
+<!--        android:id="@+id/listView"-->
+<!--        android:layout_width="335dp"-->
+<!--        android:layout_height="502dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintVertical_bias="0.93" />-->
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
