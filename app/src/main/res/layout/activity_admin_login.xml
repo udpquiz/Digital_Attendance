@@ -37,6 +37,7 @@
                 android:drawablePadding="8dp"
                 android:hint="Enter Faculty Code."
                 android:padding="8dp"
+                android:text="1"
                 android:textColor="@color/black"
                 android:textColorHighlight="@color/cardview_dark_background"
                 android:layout_marginTop="40dp"/>
@@ -50,6 +51,7 @@
                 android:drawablePadding="8dp"
                 android:hint="Password"
                 android:padding="8dp"
+                android:text="123456"
                 android:inputType="textPassword"
                 android:textColor="@color/black"
                 android:textColorHighlight="@color/cardview_dark_background"

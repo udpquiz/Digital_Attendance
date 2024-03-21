@@ -24,6 +24,12 @@
             android:name=".phpUplaod"
             android:exported="false" />
         <activity
+            android:name=".Add_Division"
+            android:exported="false" />
+        <activity
+            android:name=".Add_Room"
+            android:exported="false" />
+        <activity
             android:name=".ScheduleUpdateActivity"
             android:exported="false" />
         <activity

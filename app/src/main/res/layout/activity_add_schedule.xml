@@ -123,16 +123,16 @@
 
     <EditText
         android:id="@+id/sem"
-        android:layout_width="43dp"
+        android:layout_width="wrap_content"
         android:layout_height="59dp"
-        android:text="1"
+        android:hint="Enter Semester"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.543"
+        app:layout_constraintHorizontal_bias="0.779"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.438"></EditText>
+        app:layout_constraintVertical_bias="0.44"></EditText>
 
     <TextView
         android:id="@+id/SEM"

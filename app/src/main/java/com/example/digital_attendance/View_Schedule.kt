@@ -34,6 +34,7 @@ class View_Schedule : AppCompatActivity() {
                     c.getString(6),
                     c.getString(7),
                     c.getString(8),
+                    c.getString(9)
 
                 )
 //                deleteSchedule(did)
@@ -78,7 +79,8 @@ class View_Schedule : AppCompatActivity() {
                     c.getString(5),
                     c.getString(6),
                     c.getString(7),
-                    c.getString(8)
+                    c.getString(8),
+                    c.getString(9)
                 )
                 schedules.add(schedule)
                 c.moveToNext()

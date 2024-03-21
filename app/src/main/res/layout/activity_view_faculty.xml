@@ -25,21 +25,21 @@
                 android:id="@+id/headCode"
                 android:layout_width="55dp"
                 android:layout_height="wrap_content"
-                android:text="@string/code"
+                android:text="code"
                 android:textAlignment="center" />
 
             <TextView
                 android:id="@+id/headName"
                 android:layout_width="113dp"
                 android:layout_height="wrap_content"
-                android:text="@string/name"
+                android:text="name"
                 android:textAlignment="center" />
 
             <TextView
                 android:id="@+id/headEmail"
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
-                android:text="@string/email"
+                android:text="email"
                 android:textAlignment="center" />
 
             <TextView
@@ -47,7 +47,7 @@
                 android:layout_width="122dp"
                 android:layout_height="wrap_content"
                 android:paddingStart="8dp"
-                android:text="@string/password"
+                android:text="password"
                 android:textAlignment="center" />
 
         </TableRow>

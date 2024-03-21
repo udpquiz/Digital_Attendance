@@ -26,6 +26,8 @@ class Faculty_Login : AppCompatActivity() {
         val uname: EditText = findViewById(R.id.input_admin_uname)
         val password: EditText = findViewById(R.id.input_password)
 
+
+
         val btn: Button = findViewById(R.id.Btn_faculty_login)
         btn.setOnClickListener {
             val b = Bundle()

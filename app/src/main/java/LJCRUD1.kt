@@ -6,19 +6,24 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
-class LJCRUD1(context: Context): SQLiteOpenHelper(context,"LJ_Crud",null,4) {
+class LJCRUD1(context: Context): SQLiteOpenHelper(context,"LJ_Crud",null,8) {
     companion object{
         const val tab_faculty = "faculty"
         const val tab_course = "course"
         const val tab_studentlogin = "student_login"
         const val tab_schedule="schedule11"
+        const val tab_room="room"
+        const val tab_division="division"
         const val t="schedule1"
     }
     override fun onCreate(db: SQLiteDatabase?) {
         db?.execSQL("create table faculty(f_code INTEGER PRIMARY KEY, f_name TEXT, f_email TEXT, f_password TEXT)")
         db?.execSQL("create table course(c_code INTEGER PRIMARY KEY,SEM INTEGER, NAME TEXT)")
         db?.execSQL("create table student_login(Enrollment_Number TEXT PRIMARY KEY,Password TEXT)")
-        db?.execSQL("create table schedule11(schedule_id INTEGER PRIMARY KEY AUTOINCREMENT ,date TEXT,sem TEXT,division TEXT,start_time TEXT,end_time TEXT,sub_name TEXT,f_name TEXT,room TEXT)")
+        db?.execSQL("create table schedule11(schedule_id INTEGER PRIMARY KEY AUTOINCREMENT,date TEXT,sem TEXT,division TEXT,start_time TEXT,end_time TEXT,sub_name TEXT,f_name TEXT,room TEXT,LEC_NO TEXT)")
+//        db?.execSQL("create table room(r_id INTEGER PRIMARY KEY,NAME TEXT)")
+//        db?.execSQL("create table division(div_id INTEGER PRIMARY KEY,NAME TEXT)")
+
     }
     fun insertFaculty(f_code: Int, f_name: String, f_email: String, f_password:String): Boolean
     {
@@ -83,14 +88,16 @@ class LJCRUD1(context: Context): SQLiteOpenHelper(context,"LJ_Crud",null,4) {
     }
 
     fun inserttt(
-        date:String,
-        sem:String,
-        division:String,
-        start_time:String,
-        end_time:String,
-        sub_name:String,
-        f_name:String,
-        room:String):Boolean
+        date: String,
+        sem: String,
+        division: String,
+        start_time: String,
+        end_time: String,
+        sub_name: String,
+        f_name: String,
+        room: String,
+        LEC_NO: String
+    ):Boolean
     {
         val db = this.writableDatabase
         val cv = ContentValues()
@@ -102,6 +109,7 @@ class LJCRUD1(context: Context): SQLiteOpenHelper(context,"LJ_Crud",null,4) {
         cv.put("sub_name",sub_name)
         cv.put("f_name",f_name)
         cv.put("room",room)
+        cv.put("LEC_NO",LEC_NO)
         val ins = db.insert(tab_schedule,null,cv)
         return if (ins > 0)
             true
@@ -139,12 +147,60 @@ class LJCRUD1(context: Context): SQLiteOpenHelper(context,"LJ_Crud",null,4) {
 
         return updatedRows > 0
     }
-    fun faculty_schedule(name:String?):Cursor{
+    fun faculty_schedule(name:String?):Cursor?{
         val db = this.writableDatabase
         return db.rawQuery("Select * from $tab_schedule WHERE f_name='$name'",null)
     }
+    fun addroom(r_id:String?,name:String?):Boolean
+    {
+        val db = this.writableDatabase
+        val cv = ContentValues()
+
+        cv.put("r_id",r_id)
+        cv.put("NAME",name)
+
+        val res = db.insert(tab_room,null,cv)
+        return if (res > 0)
+            true
+        else
+            false
+    }
+    fun viewroom(): Cursor?{
+        val db=this.writableDatabase
+        return db.rawQuery("select * from $tab_room", null)
+    }
+    fun adddivision(name:String?):Boolean
+    {
+        val db = this.writableDatabase
+        val cv = ContentValues()
+
+        cv.put("NAME",name)
+
+        val res = db.insert(tab_division,null,cv)
+        return if (res > 0)
+            true
+        else
+            false
+    }
+    fun viewdiv(): Cursor?{
+        val db=this.writableDatabase
+        return db.rawQuery("select * from $tab_division", null)
+    }
+    fun checkDivisionExists(name: String?): Boolean {
+        val db = this.readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM $tab_division WHERE NAME=?", arrayOf(name))
+        val divisionExists = cursor.count > 0
+        cursor.close()
+        return divisionExists
+    }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-
+        if (oldVersion < newVersion) {
+//            db?.execSQL("create table IF NOT EXISTS room(r_id INTEGER PRIMARY KEY,NAME TEXT)")
+//            db?.execSQL("create table IF NOT EXISTS division(div_id INTEGER PRIMARY KEY,NAME TEXT)")
+            db?.execSQL("CREATE TABLE IF NOT EXISTS division_temp(div_id INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT)")
+            db?.execSQL("DROP TABLE division")
+            db?.execSQL("ALTER TABLE division_temp RENAME TO division")
+        }
     }
 }

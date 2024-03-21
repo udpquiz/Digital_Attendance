@@ -51,6 +51,16 @@ class Admin_Dashboard : AppCompatActivity() {
             val i:Intent=Intent(this,View_Course::class.java)
             startActivity(i)
         }
+        val add_room:Button=findViewById(R.id.add_room)
+        add_room.setOnClickListener{
+            val i:Intent=Intent(this,Add_Room::class.java)
+            startActivity(i)
+        }
+        val add_div:Button=findViewById(R.id.add_div)
+        add_div.setOnClickListener{
+            val i:Intent=Intent(this,Add_Division::class.java)
+            startActivity(i)
+        }
 
 
 

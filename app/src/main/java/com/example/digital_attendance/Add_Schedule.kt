@@ -22,6 +22,8 @@ import java.util.Calendar
 class Add_Schedule : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     lateinit var c: Cursor
     lateinit var c1: Cursor
+    lateinit var c2: Cursor
+    lateinit var c3: Cursor
     lateinit var suba: ArrayAdapter<String>
     private lateinit var date1: TextView
     private var selectedsem = ""
@@ -51,6 +53,12 @@ class Add_Schedule : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             val value = c1.getString(2)
             course_list.add(value)
         }
+        val aroom = ArrayList<String>()
+        c2 = db.viewroom()!!
+        while (c2.moveToNext()) {
+            val value = c2.getString(1)
+            aroom.add(value)
+        }
         efrom = findViewById(R.id.efrom)
         eto = findViewById(R.id.eto)
         val spin_lec: Spinner = findViewById(R.id.spin_lec)
@@ -60,8 +68,8 @@ class Add_Schedule : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         sem1 = findViewById(R.id.sem)
         sub = findViewById(R.id.sub)
         val lectures = arrayOf("Lec 1", "Lec 2", "Lec 3", "Lec 4")
-        val aroom = arrayOf("105","110", "115", "212", "215","112","Lab-1","Lab-2","Lab-3","Lab-4")
-        val aclass = arrayOf("ICA_A", "ICA_B", "ICA_C", "ICA_D","ICA_E")
+//        val aroom = arrayOf("105","110", "115", "212", "215","112","Lab-1","Lab-2","Lab-3","Lab-4")
+        val aclass = arrayOf("ICA_A","ICA_B","ICA_C", "ICA_D","ICA_E")
         val asem = arrayOf("1", "2", "3", "4","5","6")
 
         btnsave = findViewById(R.id.btnsave)
@@ -131,8 +139,11 @@ class Add_Schedule : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             val selectedsub = sub.selectedItem.toString()
             Log.d("Print", "$selectedsub")
             val selectedroom = room.selectedItem.toString()
+            val selectedlec = spin_lec.selectedItem.toString()
             Log.d("Print", "$selectedroom")
+            Log.d("Print", "$selectedlec")
             val c = db.viewsc()
+
             if (c != null && c.count > 0) {
                 val schedules = mutableListOf<Schedule1>()
                 c.moveToFirst()
@@ -147,6 +158,7 @@ class Add_Schedule : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                         c.getString(6),
                         c.getString(7),
                         c.getString(8),
+                        c.getString(9)
                     )
                     schedules.add(schedule)
                     c.moveToNext()
@@ -183,7 +195,8 @@ class Add_Schedule : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                         eto.text.toString(),
                         selectedsub,
                         selectedfac,
-                        selectedroom
+                        selectedroom,
+                        selectedlec
                     )
                     if (r == true) {
                         Toast.makeText(this, "Schedule Saved!!!!", Toast.LENGTH_SHORT).show()
@@ -241,7 +254,6 @@ class Add_Schedule : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                     }
                 }
             }
-
             R.id.room -> {
                 // Handle selection for room spinner
                 Toast.makeText(this, "Selected Room: $selectedItem", Toast.LENGTH_SHORT).show()
