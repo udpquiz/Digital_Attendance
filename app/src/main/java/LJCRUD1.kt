@@ -1,3 +1,6 @@
+package com.example.digital_attendance
+
+
 import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
@@ -196,8 +199,8 @@ class LJCRUD1(context: Context): SQLiteOpenHelper(context,"LJ_Crud",null,8) {
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         if (oldVersion < newVersion) {
-//            db?.execSQL("create table IF NOT EXISTS room(r_id INTEGER PRIMARY KEY,NAME TEXT)")
-//            db?.execSQL("create table IF NOT EXISTS division(div_id INTEGER PRIMARY KEY,NAME TEXT)")
+            db?.execSQL("create table IF NOT EXISTS room(r_id INTEGER PRIMARY KEY,NAME TEXT)")
+            db?.execSQL("create table IF NOT EXISTS division(div_id INTEGER PRIMARY KEY,NAME TEXT)")
             db?.execSQL("CREATE TABLE IF NOT EXISTS division_temp(div_id INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT)")
             db?.execSQL("DROP TABLE division")
             db?.execSQL("ALTER TABLE division_temp RENAME TO division")
