@@ -1,10 +1,10 @@
-package com.example.digital_attendance
-
 import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import com.example.digital_attendance.Schedule1
+import com.example.digital_attendance.datahelper
 
 class LJCRUD1(context: Context): SQLiteOpenHelper(context,"LJ_Crud",null,8) {
     companion object{
