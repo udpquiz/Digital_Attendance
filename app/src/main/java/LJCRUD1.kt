@@ -199,6 +199,7 @@ class LJCRUD1(context: Context): SQLiteOpenHelper(context,"LJ_Crud",null,8) {
     fun student_schedule(date: String?,sem:String?,div:String?):Cursor?{
         val db = this.writableDatabase
         return db.rawQuery("Select * from $tab_schedule WHERE date='$date' AND sem='$sem' AND division='$div'",null)
+//    ammar
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
