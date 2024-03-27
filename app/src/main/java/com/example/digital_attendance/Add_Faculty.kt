@@ -19,6 +19,7 @@ class Add_Faculty : AppCompatActivity() {
         val edfemail: EditText =findViewById(R.id.ed_f_email)
         val edfpassword: EditText =findViewById(R.id.ed_f_password)
 
+
         val sql = LJCRUD1(this)
 
 

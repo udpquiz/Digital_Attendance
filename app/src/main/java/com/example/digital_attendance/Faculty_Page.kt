@@ -48,7 +48,7 @@ class Faculty_Page : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
         adapter = Schedule2()
         recyclerView.adapter = adapter
-        c1 = db. faculty_schedule(new2)!!
+        c1 = db.faculty_schedule(new2)!!
         c1.moveToFirst()
         while (!c1.isAfterLast) {
             adapter.addSchedule(

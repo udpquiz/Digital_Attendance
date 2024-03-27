@@ -1,6 +1,5 @@
 package com.example.digital_attendance
 
-import LJCRUD1
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

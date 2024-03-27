@@ -5,12 +5,14 @@ import android.content.Intent
 import android.database.Cursor
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.DatePicker
 import android.widget.ListView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.cardview.widget.CardView
 import java.util.Calendar
 
 
@@ -52,18 +54,34 @@ class Student_Page : AppCompatActivity() {
         val div1=tdiv.text.toString()
         val db=LJCRUD1(this)
         c= db.student_schedule(date1.text.toString(),sem1,div1)!!
-        aa= ArrayAdapter(this,androidx.appcompat.R.layout.support_simple_spinner_dropdown_item)
+//        aa= ArrayAdapter(this,androidx.appcompat.R.layout.support_simple_spinner_dropdown_item)
+        aa = ArrayAdapter(
+            this,
+            R.layout.list_item_schedule_cardview,
+            R.id.text_schedule_date,
+            ArrayList()
+        )
         c.moveToFirst()
         while (!c.isAfterLast()){
-            aa.add("D:${c.getString(1)}" +
-                    " ${c.getString(4)}\n" +
-                    "To ${c.getString(5)}" +
-                    " Sub:${c.getString(6)}\nFac:${c.getString(7)}\n" +
-                    "Rom:${c.getString(8)}")
+            aa.add("D:${c.getString(1)}\n" +
+                    "From: ${c.getString(4)}\n" +
+                    "To: ${c.getString(5)}\n" +
+                    "Sub: ${c.getString(6)}\nFac: ${c.getString(7)}\n" +
+                    "Rom: ${c.getString(8)}")
             c.moveToNext()
         }
         c.close()
         list1.adapter=aa
+        list1.onItemClickListener =
+            AdapterView.OnItemClickListener { parent, view, position, id ->
+                val selectedItem = parent.getItemAtPosition(position) as String
+                // Show a toast with the selected item text
+                Toast.makeText(
+                    this@Student_Page,
+                    "Selected: $selectedItem",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         logout.setOnClickListener {
             editor.clear()
             editor.apply()
@@ -92,7 +110,6 @@ class Student_Page : AppCompatActivity() {
         c.close()
         aa.notifyDataSetChanged() // Notify adapter that data has changed
     }
-
     fun showDatePickerDialog() {
         val datePickerDialog = DatePickerDialog(
             this,

@@ -1,6 +1,5 @@
 package com.example.digital_attendance
 
-import LJCRUD1
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.RecyclerView
