@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/new_Attendance"
+        android:title="New Attendance" />
+    <item
+        android:id="@+id/SaveAsLast"
+        android:title="Save As Last Lecture" />
+    <item
+        android:id="@+id/EditAsLast"
+        android:title="Edit Last Lecture Attendance" />
+</menu>
