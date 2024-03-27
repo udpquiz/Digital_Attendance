@@ -53,7 +53,7 @@ class Faculty_Login : AppCompatActivity() {
                             i.putExtras(b)
                             startActivity(i)
 
-                            return@setOnClickListener // Exit the onClick listener
+                            return@setOnClickListener
                         }
 
                     } while (c.moveToNext())

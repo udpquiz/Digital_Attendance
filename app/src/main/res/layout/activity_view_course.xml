@@ -32,21 +32,21 @@
             android:id="@+id/headCode"
             android:layout_width="125dp"
             android:layout_height="match_parent"
-            android:text="@string/code"
+            android:text="code"
             android:textAlignment="center" />
 
         <TextView
             android:id="@+id/headName"
             android:layout_width="125dp"
             android:layout_height="wrap_content"
-            android:text="@string/c_name"
+            android:text="c_name"
             android:textAlignment="center" />
 
         <TextView
             android:id="@+id/headSem"
             android:layout_width="125dp"
             android:layout_height="match_parent"
-            android:text="@string/sem"
+            android:text="sem"
             android:textAlignment="center" />
 
     </TableRow>

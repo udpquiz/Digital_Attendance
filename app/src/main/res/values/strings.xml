@@ -55,9 +55,4 @@
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
     <string name="password">Password</string>
-    <string name="email">Email</string>
-    <string name="name">Name</string>
-    <string name="code">Code</string>
-    <string name="sem">Semester</string>
-    <string name="c_name">Course</string>
 </resources>

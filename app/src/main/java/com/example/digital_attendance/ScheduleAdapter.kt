@@ -1,5 +1,6 @@
 package com.example.digital_attendance
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
@@ -53,6 +54,7 @@ class ScheduleAdapter(private val context: Context) : RecyclerView.Adapter<Sched
             }
         }
 
+        @SuppressLint("SetTextI18n")
         fun bind(schedule: Schedule1) {
             textTitle.text =
                 "ID : ${schedule.id}\n"+
