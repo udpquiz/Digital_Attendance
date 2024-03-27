@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:padding="8dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_schedule_cardview" />
+        tools:listitem="@layout/item_schedule_cardview"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,6 +12,7 @@ import java.io.InputStreamReader
 class Student_Login : AppCompatActivity() {
     lateinit var c: Cursor
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_student_login)
@@ -20,6 +21,9 @@ class Student_Login : AppCompatActivity() {
         val inputPassword = findViewById<EditText>(R.id.inputPassword)
         val btn = findViewById<Button>(R.id.login_BTtn)
         val mp = LJCRUD1(this)
+        val sp=getSharedPreferences("student_details", MODE_PRIVATE)
+        val editor = sp.edit()
+
 
         val inputStream = assets.open("ICA_A.csv")
 
@@ -56,9 +60,19 @@ class Student_Login : AppCompatActivity() {
                             // Successful login
                             Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show()
                             b.putString("enrollment", enrollment)
-                            val i = Intent(this, Student_Page::class.java)
-                            i.putExtras(b)
-                            startActivity(i)
+                            if (!sp.contains("semester")) {
+                                val j = Intent(this, Student_Detail::class.java)
+                                j.putExtras(b)
+                                startActivity(j)                            }
+                            else{
+                                editor.putString("enrollment",enrollment)
+                                editor.apply()
+                                editor.commit()
+                                val i = Intent(this, Student_Page::class.java)
+                                i.putExtras(b)
+                                startActivity(i)
+                            }
+
 
                             return@setOnClickListener // Exit the onClick listener
                         }

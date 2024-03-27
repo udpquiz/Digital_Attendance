@@ -24,8 +24,8 @@ class LJCRUD1(context: Context): SQLiteOpenHelper(context,"LJ_Crud",null,8) {
         db?.execSQL("create table course(c_code INTEGER PRIMARY KEY,SEM INTEGER, NAME TEXT)")
         db?.execSQL("create table student_login(Enrollment_Number TEXT PRIMARY KEY,Password TEXT)")
         db?.execSQL("create table schedule11(schedule_id INTEGER PRIMARY KEY AUTOINCREMENT,date TEXT,sem TEXT,division TEXT,start_time TEXT,end_time TEXT,sub_name TEXT,f_name TEXT,room TEXT,LEC_NO TEXT)")
-//        db?.execSQL("create table room(r_id INTEGER PRIMARY KEY,NAME TEXT)")
-//        db?.execSQL("create table division(div_id INTEGER PRIMARY KEY,NAME TEXT)")
+        db?.execSQL("create table room(r_id INTEGER PRIMARY KEY,NAME TEXT)")
+        db?.execSQL("create table division(div_id INTEGER PRIMARY KEY,NAME TEXT)")
 
     }
     fun insertFaculty(f_code: Int, f_name: String, f_email: String, f_password:String): Boolean
@@ -196,14 +196,18 @@ class LJCRUD1(context: Context): SQLiteOpenHelper(context,"LJ_Crud",null,8) {
         cursor.close()
         return divisionExists
     }
+    fun student_schedule(date: String?,sem:String?,div:String?):Cursor?{
+        val db = this.writableDatabase
+        return db.rawQuery("Select * from $tab_schedule WHERE date='$date' AND sem='$sem' AND division='$div'",null)
+    }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         if (oldVersion < newVersion) {
-            db?.execSQL("create table IF NOT EXISTS room(r_id INTEGER PRIMARY KEY,NAME TEXT)")
-            db?.execSQL("create table IF NOT EXISTS division(div_id INTEGER PRIMARY KEY,NAME TEXT)")
-            db?.execSQL("CREATE TABLE IF NOT EXISTS division_temp(div_id INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT)")
-            db?.execSQL("DROP TABLE division")
-            db?.execSQL("ALTER TABLE division_temp RENAME TO division")
+//            db?.execSQL("create table IF NOT EXISTS room(r_id INTEGER PRIMARY KEY,NAME TEXT)")
+//            db?.execSQL("create table IF NOT EXISTS division(div_id INTEGER PRIMARY KEY,NAME TEXT)")
+//            db?.execSQL("CREATE TABLE IF NOT EXISTS division_temp(div_id INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT)")
+//            db?.execSQL("DROP TABLE division")
+//            db?.execSQL("ALTER TABLE division_temp RENAME TO division")
         }
     }
 }
