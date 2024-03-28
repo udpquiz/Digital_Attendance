@@ -120,7 +120,14 @@ class LJCRUD1(context: Context): SQLiteOpenHelper(context,"LJ_Crud",null,8) {
             false
     }
     //    fun viewsc(room: String):Cursor?{
-    fun viewsc(): Cursor?{
+    fun viewsc(date: String?): Cursor?{
+//        val sem= arrayOf("2")
+        val db=this.writableDatabase
+//        Log.d("SQL_QUERY", "SELECT * FROM schedule WHERE room=$room")
+//        return db.rawQuery("select * from $TAB where $room=?", arrayOf(room))
+        return db.rawQuery("select * from $tab_schedule WHERE date='$date'", null)
+    }
+    fun viewallsc(): Cursor?{
 //        val sem= arrayOf("2")
         val db=this.writableDatabase
 //        Log.d("SQL_QUERY", "SELECT * FROM schedule WHERE room=$room")
@@ -150,9 +157,9 @@ class LJCRUD1(context: Context): SQLiteOpenHelper(context,"LJ_Crud",null,8) {
 
         return updatedRows > 0
     }
-    fun faculty_schedule(name:String?):Cursor?{
+    fun faculty_schedule(name:String?,date: String?):Cursor?{
         val db = this.writableDatabase
-        return db.rawQuery("Select * from $tab_schedule WHERE f_name='$name'",null)
+        return db.rawQuery("Select * from $tab_schedule WHERE f_name='$name' AND date='$date'",null)
     }
     fun addroom(r_id:String?,name:String?):Boolean
     {

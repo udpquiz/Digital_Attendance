@@ -142,7 +142,7 @@ class Add_Schedule : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             val selectedlec = spin_lec.selectedItem.toString()
             Log.d("Print", "$selectedroom")
             Log.d("Print", "$selectedlec")
-            val c = db.viewsc()
+            val c = db.viewsc(date1.text.toString())
 
             if (c != null && c.count > 0) {
                 val schedules = mutableListOf<Schedule1>()
