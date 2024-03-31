@@ -78,9 +78,9 @@ class Add_Schedule : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         val year = calendar.get(Calendar.YEAR)
         val month = calendar.get(Calendar.MONTH) + 1
         val dayOfmonth = calendar.get(Calendar.DAY_OF_MONTH)
-        val dayOfMonth = dayOfmonth + 1
+//        val dayOfMonth = dayOfmonth + 1
         calendar.add(Calendar.DAY_OF_MONTH, 1)
-        date1.text = "$dayOfMonth/$month/$year"
+        date1.text = "${calendar.get(Calendar.DAY_OF_MONTH)}/${calendar.get(Calendar.MONTH)+1}/${calendar.get(Calendar.YEAR)}"
         date1.setOnClickListener {
             showDatePickerDialog()
         }
@@ -144,7 +144,7 @@ class Add_Schedule : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             Log.d("Print", "$selectedlec")
             val c = db.viewsc(date1.text.toString())
 
-            if (c != null && c.count > 0) {
+            if (c != null && c.count > -1) {
                 val schedules = mutableListOf<Schedule1>()
                 c.moveToFirst()
                 while (!c.isAfterLast) {

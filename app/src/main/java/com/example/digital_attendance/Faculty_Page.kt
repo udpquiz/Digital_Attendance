@@ -40,7 +40,7 @@ class Faculty_Page : AppCompatActivity() {
         val dayOfmonth = calendar.get(Calendar.DAY_OF_MONTH)
         val dayOfMonth = dayOfmonth + 1
         calendar.add(Calendar.DAY_OF_MONTH, 1)
-        date1.text = "$dayOfMonth/$month/$year"
+        date1.text = "${calendar.get(Calendar.DAY_OF_MONTH)}/${calendar.get(Calendar.MONTH)+1}/${calendar.get(Calendar.YEAR)}"
         date1.setOnClickListener {
             showDatePickerDialog()
         }
