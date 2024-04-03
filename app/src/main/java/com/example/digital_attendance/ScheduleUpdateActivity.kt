@@ -22,6 +22,7 @@ class ScheduleUpdateActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
     lateinit var dateTextView: TextView
     lateinit var c: Cursor
     lateinit var c1: Cursor
+    lateinit var c2: Cursor
     lateinit var sub: Spinner
     lateinit var suba: ArrayAdapter<String>
     val from = arrayOf("8:00", "8:55", "9:50", "10:45")
@@ -38,11 +39,12 @@ class ScheduleUpdateActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
         // Find views by their IDs
         val sidTextView = findViewById<TextView>(R.id.sid)
         val spin_lec: Spinner = findViewById(R.id.spin_lec)
+        spin_lec.onItemSelectedListener=this
         dateTextView = findViewById<TextView>(R.id.date1)
         val toEditText = findViewById<EditText>(R.id.eto)
         val fromEditText = findViewById<EditText>(R.id.efrom)
         val roomSpinner = findViewById<Spinner>(R.id.room)
-        val subSpinner = findViewById<Spinner>(R.id.sub)
+//        val subSpinner = findViewById<Spinner>(R.id.sub)
         val facultySpinner = findViewById<Spinner>(R.id.faculty)
         val classSpinner = findViewById<Spinner>(R.id.class1)
         semEditText = findViewById(R.id.sem)
@@ -53,10 +55,16 @@ class ScheduleUpdateActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
 
         // Initialize your database helper
         val db = LJCRUD1(this)
+        val roomData = ArrayList<String>()
+        c2 = db.viewroom()!!
+        while (c2.moveToNext()) {
+            val value = c2.getString(1)
+            roomData.add(value)
+        }
 
         // Populate spinners with data from the database
         val lectures = arrayOf("Lec 1", "Lec 2", "Lec 3", "Lec 4")
-        val roomData = arrayOf("Lab-1", "Lab-2", "Lab-3", "110", "105", "212", "215") // Replace with actual room data
+//        val roomData = arrayOf("Lab-1", "Lab-2", "Lab-3", "110", "105", "212", "215") // Replace with actual room data
         val classData = arrayOf("ICA_A", "ICA_B", "ICA_C", "ICA_D", "ICA_E") // Replace with actual class data
 
         val sl: ArrayAdapter<String> =
@@ -91,6 +99,14 @@ class ScheduleUpdateActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
             if (classPosition != -1) {
                 classSpinner.setSelection(classPosition)
             }
+        val lecPosition = lectures.indexOf(schedule.LEC_NO)
+            if (lecPosition != -1) {
+                spin_lec.setSelection(lecPosition)
+            }
+        val Position = lectures.indexOf(schedule.LEC_NO)
+            if (lecPosition != -1) {
+                spin_lec.setSelection(lecPosition)
+            }
 
             val facultyPosition = facultyList.indexOf(schedule.f_name)
         if (facultyPosition != -1) {
@@ -116,7 +132,7 @@ class ScheduleUpdateActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
                 classSpinner.selectedItem.toString(), // Get division value from appropriate view
                 fromEditText.text.toString(),
                 toEditText.text.toString(),
-                subSpinner.selectedItem.toString(),
+                sub.selectedItem.toString(),
                 facultySpinner.selectedItem.toString(),
                 roomSpinner.selectedItem.toString(),
                 spin_lec.selectedItem.toString()
