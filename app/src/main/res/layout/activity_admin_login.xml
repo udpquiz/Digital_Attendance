@@ -35,7 +35,7 @@
                 android:background="@drawable/shape"
                 android:drawableLeft="@drawable/baseline_person_24"
                 android:drawablePadding="8dp"
-                android:text="1010"
+                android:text="Admin@gmail.com"
                 android:padding="8dp"
                 android:textColor="@color/black"
                 android:textColorHighlight="@color/cardview_dark_background"

@@ -144,6 +144,7 @@
             cv.put("sub_name", schedule.sub_name)
             cv.put("f_name", schedule.f_name)
             cv.put("room", schedule.room)
+            cv.put("LEC_NO", schedule.LEC_NO)
 
             val whereClause = "schedule_id = ?"
             val whereArgs = arrayOf(schedule.id)
