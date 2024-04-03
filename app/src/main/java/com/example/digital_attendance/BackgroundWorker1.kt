@@ -1,16 +1,18 @@
-package com.example.digital_attendance
 import android.content.Context
 import android.os.AsyncTask
 import android.util.Log
+import org.json.JSONException
+import org.json.JSONObject
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.io.OutputStreamWriter
 import java.lang.Exception
 import java.net.HttpURLConnection
 import java.net.URL
-class BackgroundWorker1(private val context: Context, private val callback: () -> Unit) : AsyncTask<String, Void, String>() {
 
-    override fun doInBackground(vararg params: String?): String {
+class BackgroundWorker1(private val context: Context, private val callback: (List<InsertedData>) -> Unit) : AsyncTask<String, Void, List<InsertedData>>() {
+
+    override fun doInBackground(vararg params: String?): List<InsertedData> {
         val url = URL(params[0])
         val table = params[1]
         val students = params[2]
@@ -25,7 +27,7 @@ class BackgroundWorker1(private val context: Context, private val callback: () -
             Log.e("Students",students)
         }
 
-        var result = ""
+        var insertedDataList = mutableListOf<InsertedData>()
         var connection: HttpURLConnection? = null
         try {
             connection = url.openConnection() as HttpURLConnection
@@ -45,20 +47,31 @@ class BackgroundWorker1(private val context: Context, private val callback: () -
             }
 
             reader.close()
-            result = stringBuilder.toString()
+            val result = stringBuilder.toString()
+
+            // Parse JSON response
+            val jsonObject = JSONObject(result)
+            if (jsonObject.has("inserted_data")) {
+                val insertedDataArray = jsonObject.getJSONArray("inserted_data")
+                for (i in 0 until insertedDataArray.length()) {
+                    val insertedDataObject = insertedDataArray.getJSONObject(i)
+                    val enrollmentNumber = insertedDataObject.getString("enrollment_Number")
+                    val status = insertedDataObject.getString("status")
+                    insertedDataList.add(InsertedData(enrollmentNumber, status))
+                }
+            }
         } catch (e: Exception) {
             Log.e("BackgroundWorker", "Error: ${e.message}")
         } finally {
             connection?.disconnect()
         }
 
-        return result
+        return insertedDataList
     }
 
-    override fun onPostExecute(result: String?) {
+
+    override fun onPostExecute(result: List<InsertedData>?) {
         super.onPostExecute(result)
-        // You can perform any necessary post-execution operations here
-        Log.d("BackgroundWorker", "Result: $result")
-        callback.invoke()
+        callback.invoke(result ?: emptyList())
     }
 }

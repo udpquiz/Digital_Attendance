@@ -15,7 +15,7 @@ import java.net.MalformedURLException
 import java.net.URL
 import java.net.URLEncoder
 
-class BackgroundWorker(private val context: Context, private val onCompleteListener: () -> Unit) : AsyncTask<String, Void, String>() {
+class BackgroundWorker(private val context: Context, private val onCompleteListener: (String?) -> Unit) : AsyncTask<String, Void, String>() {
     override fun doInBackground(vararg params: String?): String? {
         val url = params[0]
         var table1 = params[1]
@@ -62,6 +62,9 @@ class BackgroundWorker(private val context: Context, private val onCompleteListe
             bufferedReader.close()
             inputStream.close()
             httpURLConnection.disconnect()
+            if (result != null && result == "ColumnAlreadyExists") {
+                return "ColumnAlreadyExists"
+            }
             return result
         } catch (e: MalformedURLException) {
             Log.e("Back", "{$e.message}")
@@ -73,6 +76,6 @@ class BackgroundWorker(private val context: Context, private val onCompleteListe
     override fun onPostExecute(result: String?) {
         super.onPostExecute(result)
         // Notify the listener that the task is complete
-        onCompleteListener()
+        onCompleteListener(result)
     }
 }

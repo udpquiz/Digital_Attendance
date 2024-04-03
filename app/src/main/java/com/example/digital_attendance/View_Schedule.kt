@@ -83,7 +83,7 @@ class View_Schedule : AppCompatActivity() {
             calendar.get(Calendar.DAY_OF_MONTH)
         )
 // maaz
-        datePickerDialog.datePicker.minDate = System.currentTimeMillis() - 1000
+//        datePickerDialog.datePicker.minDate = System.currentTimeMillis() - 1000
         datePickerDialog.show()
     }
     fun updateDataOnDateChange(selectedDate: String) {

@@ -15,7 +15,7 @@
 
         <EditText
             android:id="@+id/add_d_name"
-            android:hint="Enter Division Name"
+            android:hint="Enter Division Name eg ICA_A"
             android:textStyle="bold"
             android:background="@drawable/shape"
             android:layout_margin="1dp"

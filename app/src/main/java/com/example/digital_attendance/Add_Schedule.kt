@@ -231,23 +231,19 @@ class Add_Schedule : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         val selectedItem = spinner.selectedItem.toString()
         when (spinner.id) {
             R.id.spin_lec -> {
-                // Handle selection for spin_lec spinner
                 when (selectedItem) {
                     "Lec 1" -> {
                         efrom.setText(from[0])
                         eto.setText(to[0])
                     }
-
                     "Lec 2" -> {
                         efrom.setText(from[1])
                         eto.setText(to[1])
                     }
-
                     "Lec 3" -> {
                         efrom.setText(from[2])
                         eto.setText(to[2])
                     }
-
                     "Lec 4" -> {
                         efrom.setText(from[3])
                         eto.setText(to[3])
@@ -259,7 +255,6 @@ class Add_Schedule : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                 Toast.makeText(this, "Selected Room: $selectedItem", Toast.LENGTH_SHORT).show()
                 println(selectedItem)
             }
-
             R.id.faculty -> {
                 // Handle selection for faculty spinner
                 Toast.makeText(this, "Selected Faculty: $selectedItem", Toast.LENGTH_SHORT)
@@ -272,7 +267,6 @@ class Add_Schedule : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                 Toast.makeText(this, "Selected Class: $selectedItem", Toast.LENGTH_SHORT).show()
                 println(selectedItem)
             }
-
             R.id.sem -> {
                 val selectedSemester = sem1.toString()
                 val db = LJCRUD1(this)
@@ -288,7 +282,6 @@ class Add_Schedule : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                     ArrayAdapter(this, android.R.layout.select_dialog_item, courseList)
                 sub.setAdapter(subAdapter)
             }
-
             R.id.sub -> {
                 // Handle selection for sub spinner
                 Toast.makeText(this, "Selected Subject: $selectedItem", Toast.LENGTH_SHORT)
@@ -296,7 +289,6 @@ class Add_Schedule : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             }
         }
     }
-
     override fun onNothingSelected(parent: AdapterView<*>?) {
     }
 }

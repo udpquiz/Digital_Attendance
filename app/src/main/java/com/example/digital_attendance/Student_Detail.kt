@@ -47,7 +47,7 @@ class Student_Detail : AppCompatActivity() {
             editor.apply()
             editor.commit()
             Toast.makeText(this,"Data Saved",Toast.LENGTH_SHORT).show()
-            startActivity(Intent(this,Student_Page::class.java))
+            startActivity(Intent(this,Student_Activities::class.java))
         }
 
     }

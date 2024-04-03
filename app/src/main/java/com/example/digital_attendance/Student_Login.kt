@@ -25,7 +25,7 @@ class Student_Login : AppCompatActivity() {
         val editor = sp.edit()
 
 
-        val inputStream = assets.open("ICA_A.csv")
+        val inputStream = assets.open("Login.csv")
 
         inputStream.use {
             val csvReader = CSVReader(InputStreamReader(it))
@@ -68,7 +68,7 @@ class Student_Login : AppCompatActivity() {
                                 editor.putString("enrollment",enrollment)
                                 editor.apply()
                                 editor.commit()
-                                val i = Intent(this, Student_Page::class.java)
+                                val i = Intent(this, Student_Activities::class.java)
                                 i.putExtras(b)
                                 startActivity(i)
                             }

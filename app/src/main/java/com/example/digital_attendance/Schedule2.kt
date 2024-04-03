@@ -2,6 +2,7 @@ package com.example.digital_attendance
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -17,6 +18,7 @@ import com.example.digital_attendance.R
 class Schedule2 : RecyclerView.Adapter<Schedule2.ScheduleViewHolder>() {
     private val schedules = ArrayList<String>()
     private var menuId = 0
+    private val attendanceStatus = mutableMapOf<String, Boolean>()
 
     class ScheduleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val scheduleDetail: TextView = itemView.findViewById(R.id.scheduleDetail1)
@@ -31,6 +33,13 @@ class Schedule2 : RecyclerView.Adapter<Schedule2.ScheduleViewHolder>() {
     override fun onBindViewHolder(holder: ScheduleViewHolder, position: Int) {
         val schedule = schedules[position]
         holder.scheduleDetail.text = schedule
+        val isAttendanceTaken = attendanceStatus[schedule] ?: false
+
+        if (isAttendanceTaken) {
+            holder.itemView.setBackgroundColor(Color.GRAY)
+        } else {
+            holder.itemView.setBackgroundColor(Color.WHITE)
+        }
         holder.itemView.setOnClickListener { view ->
             val popupMenu = PopupMenu(view.context, view)
             popupMenu.inflate(R.menu.popup_menu)
@@ -39,11 +48,15 @@ class Schedule2 : RecyclerView.Adapter<Schedule2.ScheduleViewHolder>() {
                     R.id.new_Attendance -> {
                         menuId = 1
                         handleMenuAction(view, schedule)
+                        attendanceStatus[schedule] = true
+                        notifyDataSetChanged()
                         true
                     }
                     R.id.SaveAsLast -> {
                         menuId = 2
                         handleMenuAction(view, schedule)
+                        attendanceStatus[schedule] = true
+                        notifyDataSetChanged()
 
                         true
                     }
@@ -64,15 +77,16 @@ class Schedule2 : RecyclerView.Adapter<Schedule2.ScheduleViewHolder>() {
         val division = details[3].substring(11)
         val sem = details[2].substring(6)
         val subject = details[6].substring(10)
-        val lecture = details[8].substring(12)
+        val lecture = details[8].substring(9)
         Log.d("lecture", "$lecture")
         val message = "$division$sem$subject"
-        val table = "$division$sem$subject"
+        val table = "${division}${sem}_${subject}"
         Log.e("FileName", "$division.csv")
         Log.e("FileName", "$division$sem$subject")
         Toast.makeText(view.context, message, Toast.LENGTH_SHORT).show()
         val intent = Intent(view.context, phpUplaod::class.java)
         intent.putExtra("division", division)
+        intent.putExtra("sem", sem)
         intent.putExtra("lecture", lecture)
         intent.putExtra("table", table)
         intent.putExtra("MenuId", menuId) // Pass the MenuId to the next activity

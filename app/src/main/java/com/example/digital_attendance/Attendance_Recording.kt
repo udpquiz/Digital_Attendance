@@ -1,6 +1,8 @@
 package com.example.digital_attendance
+import BackgroundWorker1
 import Student
 import StudentAdapter
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -15,9 +17,11 @@ import java.util.Calendar
 class Attendance_Recording : AppCompatActivity() {
     lateinit var table: String
     lateinit var lecture: String
+    lateinit var sem: String
     lateinit var new_column: String
     lateinit var menuid: String
     lateinit var calendar: Calendar
+    @SuppressLint("SuspiciousIndentation")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_attendance_recording)
@@ -28,6 +32,7 @@ class Attendance_Recording : AppCompatActivity() {
         lecture = intent.getStringExtra("lecture").toString()
         new_column = intent.getStringExtra("new_column").toString()
         menuid = intent.getStringExtra("menuId").toString()
+        sem = intent.getStringExtra("sem").toString()
         println(table)
         println("Lecture + $lecture")
         table = table.replace(" ", "_")
@@ -35,7 +40,7 @@ class Attendance_Recording : AppCompatActivity() {
         new_column = new_column.replace("/", "_")
         Log.d("Table name", table)
         Log.d("Table name", menuid)
-        val inputStream = assets.open("${division}.csv")
+        val inputStream = assets.open("${division}${sem}.csv")
         val reader = CSVReader(InputStreamReader(inputStream))
         val studentList = java.util.ArrayList<Student>()
 
@@ -53,11 +58,7 @@ class Attendance_Recording : AppCompatActivity() {
         val studentAdapter = StudentAdapter(studentList)
         studentRecyclerView.layoutManager = LinearLayoutManager(this)
         studentRecyclerView.adapter = studentAdapter
-        if(menuid=="2"){
-            studentattendance.performClick()
-            Toast.makeText(this, "Attendance Submitted Successfully", Toast.LENGTH_SHORT).show()
-            val intent = Intent(this, print_Attendance::class.java)
-        }
+
             studentattendance.setOnClickListener {
                 val selectedStudents = studentAdapter.getSelectedStudents()
                 val selectedEnrollments = selectedStudents.map { it.name }.joinToString(",")
@@ -77,7 +78,7 @@ class Attendance_Recording : AppCompatActivity() {
                 calendar.add(Calendar.DAY_OF_MONTH, 1)
                 val date1 = "$dayOfMonth/$month$year"
                 Log.d("Dateeee", "$date1")
-                val url = "http://192.168.61.243/updateAttendance.php"
+                val url = "http://192.168.2.84/updateAttendance.php"
                 val new_column1 = new_column
                 Log.d("new_column1", new_column1)
                 val unselectedEnrollments =
@@ -93,15 +94,18 @@ class Attendance_Recording : AppCompatActivity() {
                     unselectedEnrollments,
                     menuid
                 )
-                Log.d("URL", url)
-                Log.d("table", table)
-                Log.d("enrollment", selectedStudents.map { it.name }.joinToString())
-                Log.d("new_column", new_column1)
                 Toast.makeText(this, "Attendance Submitted Successfully", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, print_Attendance::class.java)
-                intent.putParcelableArrayListExtra("Students", ArrayList(selectedStudents))
-                Log.d("AB", "$selectedEnrollments")
-                startActivity(intent)
+                startActivity(Intent(this, print_Attendance::class.java))
+                finish()
+//                Log.d("URL", url)
+//                Log.d("table", table)
+//                Log.d("enrollment", selectedStudents.map { it.name }.joinToString())
+//                Log.d("new_column", new_column1)
+//                Toast.makeText(this, "Attendance Submitted Successfully", Toast.LENGTH_SHORT).show()
+//                val intent = Intent(this, print_Attendance::class.java)
+//                intent.putParcelableArrayListExtra("Students", ArrayList(selectedStudents))
+//                Log.d("AB", "$selectedEnrollments")
+//                startActivity(intent)
             }
         }
     }

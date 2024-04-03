@@ -17,7 +17,7 @@ class FacultyAdapter(private val context: Context) : RecyclerView.Adapter<Facult
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.faculty_recycler_view, parent, false)
+        val view = LayoutInflater.from(context).inflate(R.layout.item_faculty_cardview, parent, false)
         return ViewHolder(view)
     }
 
@@ -31,10 +31,10 @@ class FacultyAdapter(private val context: Context) : RecyclerView.Adapter<Facult
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val codeTextView: TextView = itemView.findViewById(R.id.codeTextView)
-        private val nameTextView: TextView = itemView.findViewById(R.id.nameTextView)
-        private val emailTextView: TextView = itemView.findViewById(R.id.emailTextView)
-        private val passwordTextView: TextView = itemView.findViewById(R.id.passwordTextView)
+        private val codeTextView: TextView = itemView.findViewById(R.id.f_codeTextView)
+        private val nameTextView: TextView = itemView.findViewById(R.id.f_nameTextView)
+        private val emailTextView: TextView = itemView.findViewById(R.id.f_emailTextView)
+        private val passwordTextView: TextView = itemView.findViewById(R.id.f_passwordTextView)
 
         fun bind(faculty: Faculty) {
             codeTextView.text = faculty.code

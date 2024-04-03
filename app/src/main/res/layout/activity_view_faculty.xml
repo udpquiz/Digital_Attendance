@@ -63,6 +63,6 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/faculty_recycler_view" />
+        tools:listitem="faculty_recycler_view" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

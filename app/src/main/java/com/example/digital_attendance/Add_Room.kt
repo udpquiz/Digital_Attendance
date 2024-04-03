@@ -12,7 +12,6 @@ class Add_Room : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_room)
 
-        val ADD_R_CODE: EditText =findViewById(R.id.add_r_id)
         val ADD_R_NAME: EditText =findViewById(R.id.add_r_name)
 
         val ADD_ROOM: Button =findViewById(R.id.btn_add_room)
@@ -20,7 +19,7 @@ class Add_Room : AppCompatActivity() {
         val sql = LJCRUD1(this)
 
         ADD_ROOM.setOnClickListener {
-            val r:Boolean = sql.addroom(ADD_R_CODE.text.toString(),ADD_R_NAME.text.toString())
+            val r:Boolean = sql.addroom(ADD_R_NAME.text.toString())
             if (r == true)
                 Toast.makeText(this,"Room Added!!", Toast.LENGTH_SHORT).show()
             else

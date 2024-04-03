@@ -1,9 +1,11 @@
 package com.example.digital_attendance
 
 import android.content.Intent
+import android.media.Image
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 
@@ -14,7 +16,7 @@ class Admin_Dashboard : AppCompatActivity() {
 
         val b=intent.extras
 
-        val heading: TextView =findViewById(R.id.heading)
+//        val heading: TextView =findViewById(R.id.heading)
 
         val btn_Add_Faculty:CardView=findViewById(R.id.add_faculty)
         btn_Add_Faculty.setOnClickListener{
@@ -51,15 +53,19 @@ class Admin_Dashboard : AppCompatActivity() {
             val i:Intent=Intent(this,View_Course::class.java)
             startActivity(i)
         }
-        val add_room:Button=findViewById(R.id.add_room)
+        val add_room:CardView=findViewById(R.id.add_room)
         add_room.setOnClickListener{
             val i:Intent=Intent(this,Add_Room::class.java)
             startActivity(i)
         }
-        val add_div:Button=findViewById(R.id.add_div)
+        val add_div:CardView=findViewById(R.id.add_div)
         add_div.setOnClickListener{
             val i:Intent=Intent(this,Add_Division::class.java)
             startActivity(i)
+        }
+        val back = findViewById<ImageView>(R.id.back)
+        back.setOnClickListener{
+            startActivity(Intent(this,Student_Login::class.java))
         }
 
 
