@@ -17,8 +17,7 @@ class Faculty_Login : AppCompatActivity() {
 
         val btn_login: Button = findViewById(R.id.Btn_faculty_login)
         btn_login.setOnClickListener {
-            val i: Intent = Intent(this, Admin_Dashboard::class.java)
-            startActivity(i)
+            startActivity(Intent(this, Admin_Dashboard::class.java))
         }
 
         val sql = LJCRUD1(this)
@@ -47,7 +46,7 @@ class Faculty_Login : AppCompatActivity() {
                         b.putString("F_Name", storedname)
                         if (uname.text.toString() == storedUsername && password.text.toString() == storedPassword) {
                             // Successful login
-                            android.widget.Toast.makeText(this, "Successful", Toast.LENGTH_SHORT)
+                            Toast.makeText(this, "Successful", Toast.LENGTH_SHORT)
                                 .show()
                             val i = Intent(this, Faculty_Page::class.java)
                             i.putExtras(b)

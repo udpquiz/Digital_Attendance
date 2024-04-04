@@ -11,7 +11,6 @@
     android:background="@drawable/login"
     tools:context=".Student_Login">
 
-
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -24,53 +23,109 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_gravity="center_horizontal"
+            android:layout_gravity="center"
             android:padding="24dp">
 
-
-            <EditText
-                android:layout_width="match_parent"
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="297dp"
                 android:layout_height="50dp"
-                android:id="@+id/inputEnroll"
-                android:text="21004501210025"
-                android:background="@drawable/shape"
-                android:drawableLeft="@drawable/baseline_person_24"
-                android:drawablePadding="8dp"
-                android:hint="Enrollment No."
-                android:padding="8dp"
-                android:textColor="@color/black"
-                android:textColorHighlight="@color/cardview_dark_background"
-                android:layout_marginTop="40dp"/>
+                android:layout_marginTop="40dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:boxStrokeWidth="2dp"
+                app:boxStrokeColor="@color/purple">
 
-            <EditText
-                android:layout_width="match_parent"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputEnroll"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:drawablePadding="8dp"
+                    android:hint="Enrollment No."
+                    android:text="21004501210025"
+                    android:padding="8dp"
+                    android:textColor="@color/black" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="297dp"
                 android:layout_height="50dp"
-                android:text="4933447"
-                android:id="@+id/inputPassword"
-                android:background="@drawable/shape"
-                android:drawableLeft="@drawable/baseline_person_24"
-                android:drawablePadding="8dp"
-                android:hint="Password"
-                android:padding="8dp"
-                android:inputType="textPassword"
-                android:textColor="@color/black"
-                android:textColorHighlight="@color/cardview_dark_background"
-                android:layout_marginTop="20dp"/>
+                android:layout_marginTop="20dp"
+                app:counterEnabled="true"
+                app:counterMaxLength="7"
+                app:endIconMode="password_toggle"
+                app:boxStrokeWidth="2dp"
+                app:boxStrokeColor="@color/purple">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:maxLength="6"
+                    android:id="@+id/inputPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:drawablePadding="8dp"
+                    android:text="4933447"
+                    android:hint="Password"
+                    android:inputType="textPassword"
+                    android:padding="8dp"
+                    android:textColor="@color/black" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <Button
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
                 android:id="@+id/login_BTtn"
+                android:layout_width="297dp"
+                android:layout_height="50dp"
                 android:text="Login"
+                android:layout_marginTop="10dp"
+                style="@style/Widget.MaterialComponents.Button.Icon"
                 android:textSize="18sp"
-                android:layout_marginTop="30dp"
-                android:backgroundTint="@color/blue"
-                app:cornerRadius = "20dp"/>
-
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.753" />
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
 
-
-
 </LinearLayout>
+
+    <!--            <EditText-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="50dp"-->
+    <!--                android:id="@+id/inputEnroll"-->
+    <!--                android:text="21004501210025"-->
+    <!--                android:background="@drawable/shape"-->
+    <!--                android:drawableLeft="@drawable/baseline_person_24"-->
+    <!--                android:drawablePadding="8dp"-->
+    <!--                android:hint="Enrollment No."-->
+    <!--                android:padding="8dp"-->
+    <!--                android:textColor="@color/black"-->
+    <!--                android:textColorHighlight="@color/cardview_dark_background"-->
+    <!--                android:layout_marginTop="40dp"/>-->
+    <!--inputPassword-->
+    <!--            <EditText-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="50dp"-->
+    <!--                android:text="4933447"-->
+    <!--                android:id="@+id/inputPassword"-->
+    <!--                android:background="@drawable/shape"-->
+    <!--                android:drawableLeft="@drawable/baseline_person_24"-->
+    <!--                android:drawablePadding="8dp"-->
+    <!--                android:hint="Password"-->
+    <!--                android:padding="8dp"-->
+    <!--                android:inputType="textPassword"-->
+    <!--                android:textColor="@color/black"-->
+    <!--                android:textColorHighlight="@color/cardview_dark_background"-->
+    <!--                android:layout_marginTop="20dp"/>-->
+
+    <!--            <Button-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="60dp"-->
+    <!--                android:id="@+id/login_BTtn"-->
+    <!--                android:text="Login"-->
+    <!--                android:textSize="18sp"-->
+    <!--                android:layout_marginTop="30dp"-->
+    <!--                android:backgroundTint="@color/blue"-->
+    <!--                app:cornerRadius = "20dp"/>-->

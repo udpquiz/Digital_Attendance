@@ -1,17 +1,15 @@
 package com.example.digital_attendance
+
 import android.app.DatePickerDialog
 import android.database.Cursor
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.DatePicker
-import android.widget.ListView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.digital_attendance.Schedule2
 import java.util.Calendar
 
 class Faculty_Page : AppCompatActivity() {

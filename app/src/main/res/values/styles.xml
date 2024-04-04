@@ -16,4 +16,9 @@
         <item name="android:layout_weight">1</item>
         <item name="android:padding">10dp</item>
     </style>
+
+    <style name="border_textfield">
+        <item name="borderWidth">1dp</item>
+            <item name="color">@color/purple</item>
+    </style>
 </resources>

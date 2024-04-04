@@ -7,7 +7,7 @@
     import com.example.digital_attendance.Schedule1
     import com.example.digital_attendance.datahelper
 
-    class LJCRUD1(context: Context): SQLiteOpenHelper(context,"LJ_Crud",null,12) {
+    class LJCRUD1(context: Context): SQLiteOpenHelper(context,"LJ_Crud",null,13) {
         companion object{
             const val tab_faculty = "faculty"
             const val tab_course = "course"
@@ -55,18 +55,32 @@
             cv.put("c_code",c_code)
             cv.put("SEM",sem)
             cv.put("NAME",name)
+// Empty value check
+            if (c_code.isNullOrEmpty() || sem.isNullOrEmpty() || name.isNullOrEmpty()) {
+                return false
+            }
+// same value check
 
+            if (isCourseExists(c_code, sem, name)) {
+                return false
+            }
             val res = db.insert(tab_course,null,cv)
-            return if (res > 0)
-                true
-            else
-                false
+            return res != -1L
         }
         fun viewCourse(): Cursor?
         {
             val db = this.writableDatabase
             return db.rawQuery("select * from $tab_course",null)
         }
+        fun isCourseExists(courseCode: String, semester: String, courseName: String): Boolean {
+            val db = this.readableDatabase
+            val query = "SELECT * FROM $tab_course WHERE c_code = ? AND SEM = ? AND NAME = ?"
+            val cursor = db.rawQuery(query, arrayOf(courseCode, semester, courseName))
+            val exists = cursor.count > 0
+            cursor.close()
+            return exists
+        }
+
         fun viewsub(sem:String?):Cursor?{
             val db = this.writableDatabase
             return db.rawQuery("select * from $tab_course where SEM=?", arrayOf(sem))
@@ -212,9 +226,10 @@
     //            db?.execSQL("DROP TABLE division")
     //            db?.execSQL("ALTER TABLE division_temp RENAME TO division")
                 db?.execSQL("CREATE TABLE IF NOT EXISTS room_temp(r_id INTEGER PRIMARY KEY AUTOINCREMENT,NAME TEXT)")
-                db?.execSQL("DROP TABLE room")
-                db?.execSQL("ALTER TABLE room_temp RENAME TO room")
+//                db?.execSQL("DROP TABLE room")
+           //     db?.execSQL("ALTER TABLE room_temp RENAME TO room")
                   db?.execSQL("delete from $tab_studentlogin")
+                db?.execSQL("delete from $tab_course WHERE name='HTML' ")
             }
         }
     }
