@@ -212,10 +212,10 @@
     //            db?.execSQL("CREATE TABLE IF NOT EXISTS division_temp(div_id INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT)")
     //            db?.execSQL("DROP TABLE division")
     //            db?.execSQL("ALTER TABLE division_temp RENAME TO division")
-                db?.execSQL("CREATE TABLE IF NOT EXISTS room_temp(r_id INTEGER PRIMARY KEY AUTOINCREMENT,NAME TEXT)")
-                db?.execSQL("DROP TABLE room")
-                db?.execSQL("ALTER TABLE room_temp RENAME TO room")
-                  db?.execSQL("delete from $tab_studentlogin")
+//                db?.execSQL("CREATE TABLE IF NOT EXISTS room_temp(r_id INTEGER PRIMARY KEY AUTOINCREMENT,NAME TEXT)")
+//                db?.execSQL("DROP TABLE room")
+//                db?.execSQL("ALTER TABLE room_temp RENAME TO room")
+//                  db?.execSQL("delete from $tab_studentlogin")
             }
         }
     }
