@@ -121,18 +121,28 @@
         app:layout_constraintVertical_bias="0.529" />
 
 
-    <EditText
+<!--    <EditText-->
+<!--        android:id="@+id/sem"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="59dp"-->
+<!--        android:hint="Enter Semester"-->
+<!--        android:textSize="20dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.779"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintVertical_bias="0.44"></EditText>-->
+    <Spinner
         android:id="@+id/sem"
-        android:layout_width="wrap_content"
-        android:layout_height="59dp"
-        android:hint="Enter Semester"
-        android:textSize="20dp"
+        android:layout_width="150dp"
+        android:layout_height="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.779"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.44"></EditText>
+        app:layout_constraintVertical_bias="0.44"></Spinner>
 
     <TextView
         android:id="@+id/SEM"

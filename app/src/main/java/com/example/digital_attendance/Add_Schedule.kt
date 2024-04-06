@@ -30,15 +30,17 @@ class Add_Schedule : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     var ab: String = ""
     private lateinit var calendar: Calendar
     lateinit var btnsave: Button
-    lateinit var sem1: EditText
+    lateinit var sem1: Spinner
     lateinit var sub: Spinner
     val from = arrayOf("8:00", "8:55", "9:50", "10:45")
     val to = arrayOf("8:50", "9:45", "10:40", "11:35")
     lateinit var efrom: EditText
     lateinit var eto: EditText
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_schedule)
+
         val faculty_list = ArrayList<String>()
         val id = findViewById<EditText>(R.id.id1)
         val db = LJCRUD1(this)
@@ -59,18 +61,24 @@ class Add_Schedule : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             val value = c2.getString(1)
             aroom.add(value)
         }
+        val aclass = ArrayList<String>()
+        c3 = db.viewdiv()!!
+        while (c3.moveToNext()) {
+            val value = c3.getString(1)
+            aclass.add(value)
+        }
+
         efrom = findViewById(R.id.efrom)
         eto = findViewById(R.id.eto)
+
         val spin_lec: Spinner = findViewById(R.id.spin_lec)
         val room: Spinner = findViewById(R.id.room)
         val faculty: Spinner = findViewById(R.id.faculty)
         val class1: Spinner = findViewById(R.id.class1)
         sem1 = findViewById(R.id.sem)
         sub = findViewById(R.id.sub)
+
         val lectures = arrayOf("Lec 1", "Lec 2", "Lec 3", "Lec 4")
-//        val aroom = arrayOf("105","110", "115", "212", "215","112","Lab-1","Lab-2","Lab-3","Lab-4")
-        val aclass = arrayOf("ICA_A","ICA_B","ICA_C", "ICA_D","ICA_E")
-        val asem = arrayOf("1", "2", "3", "4","5","6")
 
         btnsave = findViewById(R.id.btnsave)
         date1 = findViewById(R.id.date1)
@@ -78,70 +86,66 @@ class Add_Schedule : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         val year = calendar.get(Calendar.YEAR)
         val month = calendar.get(Calendar.MONTH) + 1
         val dayOfmonth = calendar.get(Calendar.DAY_OF_MONTH)
-//        val dayOfMonth = dayOfmonth + 1
+
         calendar.add(Calendar.DAY_OF_MONTH, 1)
-        date1.text = "${calendar.get(Calendar.DAY_OF_MONTH)}/${calendar.get(Calendar.MONTH)+1}/${calendar.get(Calendar.YEAR)}"
+        date1.text = "${calendar.get(Calendar.DAY_OF_MONTH)}/${calendar.get(Calendar.MONTH) + 1}/${calendar.get(Calendar.YEAR)}"
         date1.setOnClickListener {
             showDatePickerDialog()
         }
 
-        sem1.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
+        val semesters = arrayOf("1", "2", "3", "4","5","6")
 
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                val sem2 = s.toString()
-                val course_list = ArrayList<String>()
-                c1 = db.viewsub(sem2)!!
+        val semAdapter = ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, semesters)
+        semAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        sem1.adapter = semAdapter
+
+        sem1.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val selectedSemester = semesters[position]
+
+                val courseList = ArrayList<String>()
+                c1 = db.viewsub(selectedSemester)!!
                 while (c1.moveToNext()) {
                     val value = c1.getString(2)
-                    course_list.add(value)
+                    courseList.add(value)
                 }
-//                Toast.makeText(applicationContext, "$course_list", Toast.LENGTH_SHORT).show()
                 suba = ArrayAdapter<String>(
                     this@Add_Schedule,
                     android.R.layout.select_dialog_item,
                     course_list
                 )
                 sub.setAdapter(suba)
+
+                suba.clear()
+                suba.addAll(courseList)
+                suba.notifyDataSetChanged()
             }
-            override fun afterTextChanged(s: Editable?) {
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
             }
-        })
-        val sl: ArrayAdapter<String> =
-            ArrayAdapter<String>(this, android.R.layout.select_dialog_item, lectures)
+        }
+
+        val sl: ArrayAdapter<String> = ArrayAdapter<String>(this, android.R.layout.select_dialog_item, lectures)
         spin_lec.setAdapter(sl)
 
-        val rooma: ArrayAdapter<String> =
-            ArrayAdapter<String>(this, android.R.layout.select_dialog_item, aroom)
+        val rooma: ArrayAdapter<String> = ArrayAdapter<String>(this, android.R.layout.select_dialog_item, aroom)
         room.setAdapter(rooma)
 
-        val faca: ArrayAdapter<String> =
-            ArrayAdapter<String>(this, android.R.layout.select_dialog_item, faculty_list)
+        val faca: ArrayAdapter<String> = ArrayAdapter<String>(this, android.R.layout.select_dialog_item, faculty_list)
         faculty.setAdapter(faca)
 
-        val classa: ArrayAdapter<String> =
-            ArrayAdapter<String>(this, android.R.layout.select_dialog_item, aclass)
+        val classa: ArrayAdapter<String> = ArrayAdapter<String>(this, android.R.layout.select_dialog_item, aclass)
         class1.setAdapter(classa)
+        spin_lec.onItemSelectedListener=this
 
-        val sema: ArrayAdapter<String> =
-            ArrayAdapter<String>(this, android.R.layout.select_dialog_item, asem)
-        spin_lec.onItemSelectedListener = this
         btnsave.setOnClickListener {
             val selectedfac = faculty.selectedItem.toString()
-            Log.d("Print", "$selectedfac")
-            selectedsem = sem1.text.toString()
-            Log.d("Print", "$selectedsem")
+            selectedsem = sem1.selectedItem.toString()
             ab = selectedsem
-            println("Ab : $ab")
             val selecteddiv = class1.selectedItem.toString()
-            Log.d("Print", "$selecteddiv")
             val selectedsub = sub.selectedItem.toString()
-            Log.d("Print", "$selectedsub")
             val selectedroom = room.selectedItem.toString()
             val selectedlec = spin_lec.selectedItem.toString()
-            Log.d("Print", "$selectedroom")
-            Log.d("Print", "$selectedlec")
             val c = db.viewsc(date1.text.toString())
 
             if (c != null && c.count > -1) {
@@ -173,23 +177,20 @@ class Add_Schedule : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                             it.f_name == selectedfac &&
                             it.room == selectedroom
                 }
-                val faculty_Busy = schedules.any{
+                val faculty_Busy = schedules.any {
                     it.date == date1.text.toString() &&
                             it.start_time == efrom.text.toString() &&
                             it.end_time == eto.text.toString() &&
                             it.f_name == selectedfac
                 }
                 if (lectureExists) {
-                    Toast.makeText(this, "The Lecture is Already Scheduled", Toast.LENGTH_SHORT)
-                        .show()
-                }
-                else if(faculty_Busy){
+                    Toast.makeText(this, "The Lecture is Already Scheduled", Toast.LENGTH_SHORT).show()
+                } else if (faculty_Busy) {
                     Toast.makeText(this, "Faculty Have Lecture On Same Time", Toast.LENGTH_SHORT).show()
-                }
-                else {
+                } else {
                     val r: Boolean = db.inserttt(
                         date1.text.toString(),
-                        sem1.text.toString(),
+                        sem1.selectedItem.toString(),
                         selecteddiv,
                         efrom.text.toString(),
                         eto.text.toString(),
@@ -213,7 +214,6 @@ class Add_Schedule : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         val datePickerDialog = DatePickerDialog(
             this,
             { _: DatePicker, year: Int, month: Int, dayOfMonth: Int ->
-                // Save the selected date
                 val selectedDate = "$dayOfMonth/${month + 1}/$year"
                 date1.text = selectedDate
             },
@@ -221,7 +221,7 @@ class Add_Schedule : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             calendar.get(Calendar.MONTH),
             calendar.get(Calendar.DAY_OF_MONTH)
         )
-// maaz
+
         datePickerDialog.datePicker.minDate = System.currentTimeMillis() - 1000
         datePickerDialog.show()
     }
@@ -250,45 +250,11 @@ class Add_Schedule : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                     }
                 }
             }
-            R.id.room -> {
-                // Handle selection for room spinner
-                Toast.makeText(this, "Selected Room: $selectedItem", Toast.LENGTH_SHORT).show()
-                println(selectedItem)
-            }
-            R.id.faculty -> {
-                // Handle selection for faculty spinner
-                Toast.makeText(this, "Selected Faculty: $selectedItem", Toast.LENGTH_SHORT)
-                    .show()
-                println(selectedItem)
-            }
-
-            R.id.class1 -> {
-                // Handle selection for class1 spinner
-                Toast.makeText(this, "Selected Class: $selectedItem", Toast.LENGTH_SHORT).show()
-                println(selectedItem)
-            }
-            R.id.sem -> {
-                val selectedSemester = sem1.toString()
-                val db = LJCRUD1(this)
-                val subjectsCursor = db.viewsub(selectedSemester)
-                val courseList = ArrayList<String>()
-                subjectsCursor?.let {
-                    while (it.moveToNext()) {
-                        val value = it.getString(2)
-                        courseList.add(value)
-                    }
-                }
-                val subAdapter =
-                    ArrayAdapter(this, android.R.layout.select_dialog_item, courseList)
-                sub.setAdapter(subAdapter)
-            }
-            R.id.sub -> {
-                // Handle selection for sub spinner
-                Toast.makeText(this, "Selected Subject: $selectedItem", Toast.LENGTH_SHORT)
-                    .show()
-            }
         }
+
     }
+
     override fun onNothingSelected(parent: AdapterView<*>?) {
+
     }
 }

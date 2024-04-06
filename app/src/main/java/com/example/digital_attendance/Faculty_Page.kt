@@ -112,7 +112,8 @@ class Faculty_Page : AppCompatActivity() {
                 "ID: ${c1.getString(0)}\n Date: ${c1.getString(1)}\n Sem: ${c1.getString(2)} " +
                         "\n Division: ${c1.getString(3)}\n Start Time: ${c1.getString(4)}\n" +
                         " End Time: ${c1.getString(5)} " +
-                        "\n Subject: ${c1.getString(6)}\n Room No:  ${c1.getString(8)}"
+                        "\n Subject: ${c1.getString(6)}\n Room No:  ${c1.getString(8)}\n" +
+                        " Lec No: ${c1.getString(9)}"
             )
             c1.moveToNext()
         }
