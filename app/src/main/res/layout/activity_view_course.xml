@@ -39,14 +39,14 @@
             android:id="@+id/headName"
             android:layout_width="125dp"
             android:layout_height="wrap_content"
-            android:text="c_name"
+            android:text="Subject"
             android:textAlignment="center" />
 
         <TextView
             android:id="@+id/headSem"
             android:layout_width="115dp"
             android:layout_height="match_parent"
-            android:text="sem"
+            android:text="Semester"
             android:textAlignment="center" />
 
     </TableRow>

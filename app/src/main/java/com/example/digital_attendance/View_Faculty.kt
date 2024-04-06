@@ -3,6 +3,7 @@ package com.example.digital_attendance
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.example.digital_attendance.com.example.digital_attendance.Faculty
 import com.example.digital_attendance.com.example.digital_attendance.FacultyAdapter
 
 class View_Faculty : AppCompatActivity() {

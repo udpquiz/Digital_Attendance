@@ -20,7 +20,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:inputType="number"
                 android:id="@+id/add_c_id"
-                android:hint="Course ID"
+                android:hint="Subject ID"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="40dp"
@@ -37,7 +37,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/add_c_name"
-                android:hint="Course Name"
+                android:hint="Subject Name"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="40dp"
@@ -55,7 +55,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:inputType="number"
                 android:id="@+id/add_c_sem"
-                android:hint="Course Sem"
+                android:hint="Subject Sem"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="40dp"
@@ -71,7 +71,7 @@
             android:id="@+id/btn_add_course"
             android:layout_width="371dp"
             android:layout_height="49dp"
-            android:text="Add Course"
+            android:text="Add Subject"
             style="@style/Widget.MaterialComponents.Button.Icon"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"

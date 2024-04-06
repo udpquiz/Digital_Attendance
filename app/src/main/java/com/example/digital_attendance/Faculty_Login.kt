@@ -13,7 +13,7 @@ class Faculty_Login : AppCompatActivity() {
     private lateinit var c: Cursor
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_admin_login)
+        setContentView(R.layout.activity_faculty_login)
 
         val btn_login: Button = findViewById(R.id.Btn_faculty_login)
         btn_login.setOnClickListener {
@@ -22,8 +22,8 @@ class Faculty_Login : AppCompatActivity() {
 
         val sql = LJCRUD1(this)
 
-        val uname: EditText = findViewById(R.id.input_admin_uname)
-        val password: EditText = findViewById(R.id.input_password)
+        val uname: EditText = findViewById(R.id.input_faculty_code)
+        val password: EditText = findViewById(R.id.input_faculty_password)
 
 
 

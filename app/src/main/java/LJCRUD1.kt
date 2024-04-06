@@ -7,7 +7,7 @@
     import com.example.digital_attendance.Schedule1
     import com.example.digital_attendance.datahelper
 
-    class LJCRUD1(context: Context): SQLiteOpenHelper(context,"LJ_Crud",null,12) {
+    class LJCRUD1(context: Context): SQLiteOpenHelper(context,"LJ_Crud",null,14) {
         companion object{
             const val tab_faculty = "faculty"
             const val tab_course = "course"
@@ -201,6 +201,15 @@
             cursor.close()
             return divisionExists
         }
+
+        fun checkRoomExists(name: String?): Boolean {
+            val db = this.readableDatabase
+            val cursor = db.rawQuery("SELECT * FROM $tab_room WHERE NAME=?", arrayOf(name))
+            val roomExists = cursor.count > 0
+            cursor.close()
+            return roomExists
+        }
+
         fun student_schedule(date: String?,sem:String?,div:String?):Cursor?{
             val db = this.writableDatabase
             return db.rawQuery("Select * from $tab_schedule WHERE date='$date' AND sem='$sem' AND division='$div'",null)
