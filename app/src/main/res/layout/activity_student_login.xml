@@ -27,7 +27,7 @@
             android:padding="24dp">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="297dp"
+                android:layout_width="285dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="40dp"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -48,7 +48,7 @@
 
 
             <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="297dp"
+                android:layout_width="285dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="20dp"
                 app:counterEnabled="true"
@@ -58,7 +58,7 @@
                 app:boxStrokeColor="@color/purple">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:maxLength="6"
+                    android:maxLength="7"
                     android:id="@+id/inputPassword"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -74,7 +74,7 @@
 
             <Button
                 android:id="@+id/login_BTtn"
-                android:layout_width="297dp"
+                android:layout_width="285dp"
                 android:layout_height="50dp"
                 android:text="Login"
                 android:layout_marginTop="10dp"

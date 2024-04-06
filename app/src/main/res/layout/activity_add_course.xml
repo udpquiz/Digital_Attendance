@@ -72,7 +72,6 @@
             android:layout_width="371dp"
             android:layout_height="49dp"
             android:text="Add Course"
-            app:icon="@drawable/ic_add_24dp"
             style="@style/Widget.MaterialComponents.Button.Icon"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
