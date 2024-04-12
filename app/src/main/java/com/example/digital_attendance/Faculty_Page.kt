@@ -1,17 +1,15 @@
 package com.example.digital_attendance
+
 import android.app.DatePickerDialog
 import android.database.Cursor
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.DatePicker
-import android.widget.ListView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.digital_attendance.Schedule2
 import java.util.Calendar
 
 class Faculty_Page : AppCompatActivity() {
@@ -51,8 +49,8 @@ class Faculty_Page : AppCompatActivity() {
             do{
                 val storename = c.getString(7)
                 if(storename==faculty_name.text) {
-                     storedname = storename
-                     new2 = storedname
+                    storedname = storename
+                    new2 = storedname
                     println(storedname)
 //                    Toast.makeText(this,"$storedname",Toast.LENGTH_SHORT).show()
                 }
@@ -66,17 +64,17 @@ class Faculty_Page : AppCompatActivity() {
         recyclerView.adapter = adapter
         c1 = db.faculty_schedule(new2,date1.text.toString())!!
         if (c1 != null && c1.count > 0) {
-        c1.moveToFirst()
-        while (!c1.isAfterLast) {
-            adapter.addSchedule(
-                "ID: ${c1.getString(0)}\n Date: ${c1.getString(1)}\n Sem: ${c1.getString(2)}" +
-                        "\n Division: ${c1.getString(3)}\n Start Time: ${c1.getString(4)}\n" +
-                        " End Time: ${c1.getString(5)} " +
-                        "\n Subject: ${c1.getString(6)}\n Room No:  ${c1.getString(8)}\n Lec No: ${c1.getString(9)}"
-            )
-            c1.moveToNext()
-        }
-        c1.close()
+            c1.moveToFirst()
+            while (!c1.isAfterLast) {
+                adapter.addSchedule(
+                    "ID: ${c1.getString(0)}\n Date: ${c1.getString(1)}\n Sem: ${c1.getString(2)}" +
+                            "\n Division: ${c1.getString(3)}\n Start Time: ${c1.getString(4)}\n" +
+                            " End Time: ${c1.getString(5)} " +
+                            "\n Subject: ${c1.getString(6)}\n Room No:  ${c1.getString(8)}\n Lec No: ${c1.getString(9)}"
+                )
+                c1.moveToNext()
+            }
+            c1.close()
         } else {
             Toast.makeText(this, "No Records Available", Toast.LENGTH_SHORT).show()
             // Handle case when no records found
@@ -108,17 +106,16 @@ class Faculty_Page : AppCompatActivity() {
         val db = LJCRUD1(this)
         c1 = db.faculty_schedule(new2,date1.text.toString())!!
         if (c1 != null && c1.count > 0) {
-        c1.moveToFirst()
-        while (!c1.isAfterLast) {
-            adapter.addSchedule(
-                "ID: ${c1.getString(0)}\n Date: ${c1.getString(1)}\n Sem: ${c1.getString(2)} " +
-                        "\n Division: ${c1.getString(3)}\n Start Time: ${c1.getString(4)}\n" +
-                        " End Time: ${c1.getString(5)} " +
-                        "\n Subject: ${c1.getString(6)}\n Room No:  ${c1.getString(8)}\n" +
-                        " Lec No: ${c1.getString(9)}"
-            )
-            c1.moveToNext()
-        }
+            c1.moveToFirst()
+            while (!c1.isAfterLast) {
+                adapter.addSchedule(
+                    "ID: ${c1.getString(0)}\n Date: ${c1.getString(1)}\n Sem: ${c1.getString(2)} " +
+                            "\n Division: ${c1.getString(3)}\n Start Time: ${c1.getString(4)}\n" +
+                            " End Time: ${c1.getString(5)} " +
+                            "\n Subject: ${c1.getString(6)}\n Room No:  ${c1.getString(8)}"
+                )
+                c1.moveToNext()
+            }
             c1.close()
         } else {
             Toast.makeText(this, "No Records Available", Toast.LENGTH_SHORT).show()

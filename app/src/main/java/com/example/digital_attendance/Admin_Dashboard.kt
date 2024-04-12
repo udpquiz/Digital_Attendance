@@ -5,8 +5,11 @@ import android.media.Image
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.cardview.widget.CardView
 
 class Admin_Dashboard : AppCompatActivity() {
@@ -54,22 +57,92 @@ class Admin_Dashboard : AppCompatActivity() {
             startActivity(i)
         }
         val add_room:CardView=findViewById(R.id.add_room)
-        add_room.setOnClickListener{
-            val i:Intent=Intent(this,Add_Room::class.java)
-            startActivity(i)
-        }
+//        add_room.setOnClickListener{
+//            val i:Intent=Intent(this,Add_Room::class.java)
+//            startActivity(i)
+//        }
         val add_div:CardView=findViewById(R.id.add_div)
-        add_div.setOnClickListener{
-            val i:Intent=Intent(this,Add_Division::class.java)
-            startActivity(i)
-        }
+//        add_div.setOnClickListener{
+//            val i:Intent=Intent(this,Add_Division::class.java)
+//            startActivity(i)
+//        }
         val back = findViewById<ImageView>(R.id.back)
         back.setOnClickListener{
             startActivity(Intent(this,Student_Login::class.java))
         }
 
+        val sql = LJCRUD1(this)
+        add_room.setOnClickListener {
+            showAddRoomDialog(sql)
+        }
 
+        add_div.setOnClickListener {
+            showAddDivisionDialog(sql)
+        }
 
+    }
 
+    private fun showAddRoomDialog(sql: LJCRUD1) {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Add Room")
+
+        val input = EditText(this)
+        input.hint = "Enter Room Number"
+        builder.setView(input)
+
+        builder.setPositiveButton("Add") { dialog, which ->
+            val roomNumber = input.text.toString()
+            val roomExists = sql.checkRoomExists(roomNumber)
+            if (roomExists) {
+                Toast.makeText(this, "Room already exists!", Toast.LENGTH_SHORT).show()
+            } else {
+                val isSuccess = sql.adddivision(roomNumber)
+                if (isSuccess) {
+                    Toast.makeText(this, "Room added successfully!", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this, Admin_Dashboard::class.java))
+                } else {
+                    Toast.makeText(this, "Failed to add room!", Toast.LENGTH_SHORT).show()
+                }
+            }
+            dialog.dismiss()
+        }
+
+        builder.setNegativeButton("Cancel") { dialog, which ->
+            dialog.cancel()
+        }
+
+        builder.show()
+    }
+
+    private fun showAddDivisionDialog(sql: LJCRUD1) {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Add Division")
+
+        val input = EditText(this)
+        input.hint = "Ex 'ICA_A' "
+        builder.setView(input)
+
+        builder.setPositiveButton("Add") { dialog, which ->
+            val divisionName = input.text.toString()
+            val divisionExists = sql.checkDivisionExists(divisionName)
+            if (divisionExists) {
+                Toast.makeText(this, "Division already exists!", Toast.LENGTH_SHORT).show()
+            } else {
+                val isSuccess = sql.adddivision(divisionName)
+                if (isSuccess) {
+                    Toast.makeText(this, "Division added successfully!", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this, Admin_Dashboard::class.java))
+                } else {
+                    Toast.makeText(this, "Failed to add division!", Toast.LENGTH_SHORT).show()
+                }
+            }
+            dialog.dismiss()
+        }
+
+        builder.setNegativeButton("Cancel") { dialog, which ->
+            dialog.cancel()
+        }
+
+        builder.show()
     }
 }

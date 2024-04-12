@@ -23,10 +23,10 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.555"
+        app:layout_constraintHorizontal_bias="0.444"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.044">
+        app:layout_constraintVertical_bias="0.037">
 
         <TextView
             android:id="@+id/headCode"
@@ -39,14 +39,14 @@
             android:id="@+id/headName"
             android:layout_width="125dp"
             android:layout_height="wrap_content"
-            android:text="c_name"
+            android:text="Subject"
             android:textAlignment="center" />
 
         <TextView
             android:id="@+id/headSem"
-            android:layout_width="125dp"
+            android:layout_width="115dp"
             android:layout_height="match_parent"
-            android:text="sem"
+            android:text="Semester"
             android:textAlignment="center" />
 
     </TableRow>
@@ -63,15 +63,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.783"
         tools:listitem="@layout/item_course_cardview" />
-    <!--    <ListView-->
-<!--        android:id="@+id/listView"-->
-<!--        android:layout_width="335dp"-->
-<!--        android:layout_height="502dp"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:layout_constraintVertical_bias="0.93" />-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

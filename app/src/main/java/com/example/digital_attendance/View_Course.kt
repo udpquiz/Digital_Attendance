@@ -8,9 +8,11 @@ class View_Course : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: CourseAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_view_course)
+
         recyclerView = findViewById(R.id.c_recyclerView)
         // Assuming you have a list of Faculty objects named facultyList
         adapter = CourseAdapter(this)
@@ -20,8 +22,8 @@ class View_Course : AppCompatActivity() {
     }
 
 private fun fetchDataAndSetToAdapter() {
-    val facultyList = getCourseList()
-    adapter.setData(facultyList)
+    val courseList = getCourseList()
+    adapter.setData(courseList)
 }
     private fun getCourseList(): List<Course> {
         val sql = LJCRUD1(this)
@@ -50,25 +52,4 @@ private fun fetchDataAndSetToAdapter() {
 
         return courseList
     }
-        //
-//        val listview: ListView =findViewById(R.id.listView)
-//
-//        val sql = LJCRUD1(this)
-//
-//        c = sql.viewCourse()!!
-//        if(c.getCount() === 0)
-//        {
-//            Toast.makeText(this,"Record Not Added!!", Toast.LENGTH_SHORT).show()
-//        }
-//
-//        aa = ArrayAdapter(this,androidx.appcompat.R.layout.support_simple_spinner_dropdown_item)
-//        c.moveToFirst()
-//        while (!c.isAfterLast)
-//        {
-//            aa.add(c.getString(0)+"   "+c.getString(1)+"   "+c.getString(2))
-//            c.moveToNext()
-//        }
-//        c.close()
-//        listview.adapter=aa
-
 }

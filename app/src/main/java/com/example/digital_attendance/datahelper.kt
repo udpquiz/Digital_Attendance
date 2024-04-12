@@ -4,7 +4,6 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import java.security.AccessControlContext
 
 class datahelper(context: Context):SQLiteOpenHelper(context,"DATABASE",null,4) {
 //class datahelper(context: Context):SQLiteOpenHelper(context,"LJ",null,1) {

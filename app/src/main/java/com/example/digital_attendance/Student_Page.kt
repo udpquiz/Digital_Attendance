@@ -37,9 +37,8 @@ class Student_Page : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_student_page)
 
-        val logout: Button = findViewById(R.id.logout)
         val sp = getSharedPreferences("student_details", MODE_PRIVATE)
-        val editor = sp.edit()
+
         val b = intent.extras
         val t = findViewById<TextView>(R.id.t)
         tsem = findViewById<TextView>(R.id.tsem)
@@ -92,13 +91,6 @@ class Student_Page : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = aa
 
-        logout.setOnClickListener {
-            editor.clear()
-            editor.apply()
-            editor.commit()
-            startActivity(Intent(this, Student_Login::class.java))
-            Toast.makeText(this, "Logout Success", Toast.LENGTH_SHORT).show()
-        }
     }
 
     fun updateDataOnDateChange(selectedDate: String) {

@@ -121,28 +121,18 @@
         app:layout_constraintVertical_bias="0.529" />
 
 
-<!--    <EditText-->
-<!--        android:id="@+id/sem"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="59dp"-->
-<!--        android:hint="Enter Semester"-->
-<!--        android:textSize="20dp"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.779"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:layout_constraintVertical_bias="0.44"></EditText>-->
     <Spinner
         android:id="@+id/sem"
-        android:layout_width="150dp"
-        android:layout_height="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="59dp"
+        android:hint="Enter Semester"
+        android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.779"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.44"></Spinner>
+        app:layout_constraintVertical_bias="0.44"/>
 
     <TextView
         android:id="@+id/SEM"
@@ -184,7 +174,7 @@
         android:id="@+id/ClASS"
         android:layout_width="141dp"
         android:layout_height="33dp"
-        android:text="Select Class"
+        android:text="Select Division"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -234,15 +224,3 @@
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-    <!--<TextView
-            android:id="@+id/ROOM"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TextView"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.127"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.396" />-->

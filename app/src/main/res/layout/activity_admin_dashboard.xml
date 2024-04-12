@@ -22,7 +22,7 @@
             android:id="@+id/back"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@drawable/back"></ImageView>
+            android:src="@drawable/back"/>
 
         <LinearLayout
             android:id="@+id/row1"
@@ -313,7 +313,7 @@
                         android:layout_below="@+id/homeImage"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="10dp"
-                        android:text="Add Course"
+                        android:text="Add Subject"
                         android:textColor="@color/lavender"
                         android:textSize="20sp" />
 
@@ -348,7 +348,7 @@
                         android:layout_below="@+id/View_Course"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="10dp"
-                        android:text="View Course"
+                        android:text="View Subject"
                         android:textColor="@color/lavender"
                         android:textSize="20sp" />
 
