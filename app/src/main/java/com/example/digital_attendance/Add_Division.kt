@@ -20,7 +20,6 @@ class Add_Division : AppCompatActivity() {
         ADD_ROOM.setOnClickListener {
             val divisionName = ADD_D_NAME.text.toString()
             val divisionExists = sql.checkDivisionExists(divisionName)
-            val r: Boolean = sql.adddivision(divisionName)
             if (divisionExists) {
                 Toast.makeText(this, "Division already exists!", Toast.LENGTH_SHORT).show()
             } else {

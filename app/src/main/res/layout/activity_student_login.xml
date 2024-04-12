@@ -56,6 +56,31 @@
                 android:textColor="@color/black"
                 android:textColorHighlight="@color/cardview_dark_background"
                 android:layout_marginTop="20dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Select Semester"
+                android:textSize="18dp"
+                android:layout_marginTop="20dp"/>
+            <Spinner
+                android:id="@+id/spin_sem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:prompt="@string/app_name"
+                android:background="@drawable/shape"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Select Division"
+                android:textSize="18dp"
+                android:layout_marginTop="20dp"/>
+            <Spinner
+                android:id="@+id/spin_div"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape"
+                />
 
             <Button
                 android:layout_width="match_parent"

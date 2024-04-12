@@ -30,7 +30,7 @@ class ScheduleUpdateActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
     val to = arrayOf("8:50", "9:45", "10:40", "11:35")
     lateinit var efrom: EditText
     lateinit var eto: EditText
-    lateinit var sem1: EditText
+//    lateinit var sem1: Spinner
     var subdata = ArrayList<String>()
 
 
@@ -50,7 +50,7 @@ class ScheduleUpdateActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
 //        val subSpinner = findViewById<Spinner>(R.id.sub)
         val facultySpinner = findViewById<Spinner>(R.id.faculty)
         val classSpinner = findViewById<Spinner>(R.id.class1)
-        sem1 = findViewById(R.id.sem)
+        val sem1 = findViewById<Spinner>(R.id.sem)
         val btnSave = findViewById<Button>(R.id.btnsave)
         sub = findViewById(R.id.sub)
         efrom = findViewById(R.id.efrom)
@@ -64,10 +64,23 @@ class ScheduleUpdateActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
             val value = c2.getString(1)
             roomData.add(value)
         }
+        val course_list = ArrayList<String>()
+        c1 = db.viewsub("4")!!
+        while (c1.moveToNext()) {
+            val value = c1.getString(2)
+            course_list.add(value)
+        }
+        val aclass = ArrayList<String>()
+        c3 = db.viewdiv()!!
+        while (c3.moveToNext()) {
+            val value = c3.getString(1)
+            aclass.add(value)
+        }
 
         // Populate spinners with data from the database
         val lectures = arrayOf("Lec 1", "Lec 2", "Lec 3", "Lec 4")
         val classData = arrayOf("ICA_A", "ICA_B", "ICA_C", "ICA_D", "ICA_E") // Replace with actual class data
+        val semesters = arrayOf("1", "2", "3", "4","5","6")
 
         val sl: ArrayAdapter<String> =
             ArrayAdapter<String>(this, android.R.layout.select_dialog_item, lectures)
@@ -77,7 +90,7 @@ class ScheduleUpdateActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
         roomSpinner.setAdapter(rooma)
 
         val classa: ArrayAdapter<String> =
-            ArrayAdapter<String>(this, android.R.layout.select_dialog_item, classData)
+            ArrayAdapter<String>(this, android.R.layout.select_dialog_item, aclass)
         classSpinner.setAdapter(classa)
 
         // Assuming you have methods to retrieve data for each spinner
@@ -90,12 +103,21 @@ class ScheduleUpdateActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
         val faca: ArrayAdapter<String> =
             ArrayAdapter<String>(this, android.R.layout.select_dialog_item, facultyList)
         facultySpinner.setAdapter(faca)
+        val sema: ArrayAdapter<String> =
+            ArrayAdapter<String>(this, android.R.layout.select_dialog_item, semesters)
+        sem1.setAdapter(sema)
+        suba = ArrayAdapter<String>(
+            this@ScheduleUpdateActivity,
+            android.R.layout.select_dialog_item
+        )
+        sub.setAdapter(suba)
 
         // Set saved values to spinners
         val roomPosition = roomData.indexOf(schedule.room)
         if (roomPosition != -1) {
             roomSpinner.setSelection(roomPosition)
         }
+
 
         val classPosition = classData.indexOf(schedule.division)
         if (classPosition != -1) {
@@ -105,43 +127,76 @@ class ScheduleUpdateActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
         if (lecPosition != -1) {
             spin_lec.setSelection(lecPosition)
         }
-        suba = ArrayAdapter<String>(
-            this@ScheduleUpdateActivity,
-            android.R.layout.select_dialog_item,
-            subdata
-        )
+        val semPosition = semesters.indexOf(schedule.sem)
+        if (semPosition != -1) {
+            sem1.setSelection(semPosition)
+        }
+
+//        suba = ArrayAdapter<String>(
+//            this@ScheduleUpdateActivity,
+//            android.R.layout.select_dialog_item
+//        )
 
         val facultyPosition = facultyList.indexOf(schedule.f_name)
         if (facultyPosition != -1) {
             facultySpinner.setSelection(facultyPosition)
         }
 
-        sem1.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
+//        sem1.addTextChangedListener(object : TextWatcher {
+//            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+//            }
+//
+//            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+//                val semValue = s.toString()
+//                c3 = db.viewsub(semValue)!!
+//                subdata.clear() // Clear previous data before adding new values
+//                while (c3.moveToNext()) {
+//                    val value = c3.getString(2)
+//                    subdata.add(value)
+//                }
+//                // Update the adapter with new data
+//                suba.notifyDataSetChanged()
+//
+//                // Set the selection after updating the data
+//                val subPosition = subdata.indexOf(schedule.sub_name)
+//                if (subPosition != -1) {
+//                    sub.setSelection(subPosition)
+//                }
+//            }
+//
+//            override fun afterTextChanged(s: Editable?) {
+//            }
+//        })
+//        sub.adapter = suba
+        sem1.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val selectedSemester = semesters[position]
 
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                val semValue = s.toString()
-                c3 = db.viewsub(semValue)!!
-                subdata.clear() // Clear previous data before adding new values
-                while (c3.moveToNext()) {
-                    val value = c3.getString(2)
-                    subdata.add(value)
+                val courseList = ArrayList<String>()
+                c1 = db.viewsub(selectedSemester)!!
+                while (c1.moveToNext()) {
+                    val value = c1.getString(2)
+                    courseList.add(value)
                 }
-                // Update the adapter with new data
-                suba.notifyDataSetChanged()
+//                suba = ArrayAdapter<String>(
+//                    this@ScheduleUpdateActivity,
+//                    android.R.layout.select_dialog_item
+//                )
+//                sub.setAdapter(suba)
 
-                // Set the selection after updating the data
-                val subPosition = subdata.indexOf(schedule.sub_name)
+
+                suba.clear()
+                suba.addAll(courseList)
+                suba.notifyDataSetChanged()
+                val subPosition = courseList.indexOf(schedule.sub_name)
                 if (subPosition != -1) {
                     sub.setSelection(subPosition)
                 }
             }
 
-            override fun afterTextChanged(s: Editable?) {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
             }
-        })
-        sub.adapter = suba
+        }
 
         // Other code for initializing and setting values to views...
 
@@ -150,7 +205,7 @@ class ScheduleUpdateActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
         dateTextView.text = schedule.date
         eto.setText(schedule.end_time)
         efrom.setText(schedule.start_time)
-        sem1.setText(schedule.sem)
+//        sem1.selectedItem.toString(schedule.sem)
 
         // Handle save button click
         btnSave.setOnClickListener {
@@ -158,7 +213,7 @@ class ScheduleUpdateActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
             val updatedSchedule = Schedule1(
                 schedule.id,
                 dateTextView.text.toString(),
-                sem1.text.toString(),
+                sem1.selectedItem.toString(),
                 classSpinner.selectedItem.toString(), // Get division value from appropriate view
                 fromEditText.text.toString(),
                 toEditText.text.toString(),
@@ -175,13 +230,13 @@ class ScheduleUpdateActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
             // Show appropriate message based on update status
             if (isUpdated) {
                 // Update successful
-                Toast.makeText(this, "Update hogaya", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Successfully Updated", Toast.LENGTH_SHORT).show()
                 // You can also navigate back to the previous activity if needed
                 startActivity(Intent(this, View_Schedule::class.java))
 
             } else {
                 // Update failed
-                Toast.makeText(this, "Nhi hua", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Update Failed", Toast.LENGTH_SHORT).show()
             }
         }
 

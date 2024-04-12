@@ -1,18 +1,22 @@
 package com.example.digital_attendance
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.database.Cursor
 import android.os.Bundle
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.opencsv.CSVReader
 import java.io.InputStreamReader
 
 class Student_Login : AppCompatActivity() {
+    private val sharedfile = "student_details"
     lateinit var c: Cursor
-
-
+    lateinit var c3: Cursor
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_student_login)
@@ -21,8 +25,25 @@ class Student_Login : AppCompatActivity() {
         val inputPassword = findViewById<EditText>(R.id.inputPassword)
         val btn = findViewById<Button>(R.id.login_BTtn)
         val mp = LJCRUD1(this)
-        val sp=getSharedPreferences("student_details", MODE_PRIVATE)
+//        val sp=getSharedPreferences("student_details", MODE_PRIVATE)
+        val sp: SharedPreferences =this.getSharedPreferences(sharedfile, Context.MODE_PRIVATE)
         val editor = sp.edit()
+        val sem: Spinner =findViewById(R.id.spin_sem)
+        val div: Spinner =findViewById(R.id.spin_div)
+        val semester= arrayOf("1","2","3","4","5","6")
+        val aclass = ArrayList<String>()
+        c3 = mp.viewdiv()!!
+        while (c3.moveToNext()) {
+            val value = c3.getString(1)
+            aclass.add(value)
+        }
+
+        val ss: ArrayAdapter<String> =
+            ArrayAdapter<String>(this, android.R.layout.select_dialog_item, semester)
+        sem.setAdapter(ss)
+        val dd: ArrayAdapter<String> =
+            ArrayAdapter<String>(this, android.R.layout.select_dialog_item,aclass)
+        div.setAdapter(dd)
 
 
         val inputStream = assets.open("Login.csv")
@@ -60,18 +81,28 @@ class Student_Login : AppCompatActivity() {
                             // Successful login
                             Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show()
                             b.putString("enrollment", enrollment)
-                            if (!sp.contains("semester")) {
-                                val j = Intent(this, Student_Detail::class.java)
-                                j.putExtras(b)
-                                startActivity(j)                            }
-                            else{
+//                            if (!sp.contains("semester")) {
+//                                val j = Intent(this, Student_Detail::class.java)
+//                                j.putExtras(b)
+//                                startActivity(j)
+                                val selectedsem = sem.selectedItem.toString()
+                                val selecteddiv = div.selectedItem.toString()
                                 editor.putString("enrollment",enrollment)
+                                editor.putString("semester",selectedsem)
+                                editor.putString("division",selecteddiv)
                                 editor.apply()
                                 editor.commit()
-                                val i = Intent(this, Student_Activities::class.java)
-                                i.putExtras(b)
-                                startActivity(i)
-                            }
+//                                Toast.makeText(this,"Data Save",Toast.LENGTH_SHORT).show()
+                                startActivity(Intent(this,Student_Activities::class.java))
+//                            }
+//                            else{
+//                                editor.putString("enrollment",enrollment)
+//                                editor.apply()
+//                                editor.commit()
+//                                val i = Intent(this, Student_Activities::class.java)
+//                                i.putExtras(b)
+//                                startActivity(i)
+//                            }
 
 
                             return@setOnClickListener // Exit the onClick listener
