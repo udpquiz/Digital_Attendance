@@ -30,4 +30,8 @@ class Add_Course : AppCompatActivity() {
             startActivity(Intent(this,Admin_Dashboard::class.java))
         }
     }
+    override fun onBackPressed() {
+        super.onBackPressed()
+        startActivity(Intent(this, Admin_Dashboard::class.java))
+    }
 }

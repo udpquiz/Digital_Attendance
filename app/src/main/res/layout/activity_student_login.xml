@@ -57,7 +57,7 @@
                 app:boxStrokeColor="@color/purple">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:maxLength="6"
+                    android:maxLength="7"
                     android:id="@+id/inputPassword"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

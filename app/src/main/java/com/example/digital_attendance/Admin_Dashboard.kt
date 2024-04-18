@@ -81,6 +81,10 @@ class Admin_Dashboard : AppCompatActivity() {
         }
 
     }
+    override fun onBackPressed() {
+        super.onBackPressed()
+        startActivity(Intent(this,MainActivity::class.java))
+    }
 
     private fun showAddRoomDialog(sql: LJCRUD1) {
         val builder = AlertDialog.Builder(this)

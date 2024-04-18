@@ -46,4 +46,8 @@ class Student_Activities : AppCompatActivity() {
             Toast.makeText(this, "Logout Success", Toast.LENGTH_SHORT).show()
         }
     }
+    override fun onBackPressed() {
+        super.onBackPressed()
+        startActivity(Intent(this, MainActivity::class.java))
+    }
 }

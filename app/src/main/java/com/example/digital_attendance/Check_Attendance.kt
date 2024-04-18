@@ -1,6 +1,7 @@
 package com.example.digital_attendance
 
 import BackgroundWorker3
+import android.content.Intent
 import android.database.Cursor
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -72,5 +73,9 @@ class Check_Attendance : AppCompatActivity() {
                 Log.d("Percentage", "Percentage: ${attendanceResult.percentage}")
             }.execute(url, table, enroll)
         }
+    }
+    override fun onBackPressed() {
+        super.onBackPressed()
+        startActivity(Intent(this, Student_Activities::class.java))
     }
 }

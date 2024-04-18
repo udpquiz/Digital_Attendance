@@ -1,6 +1,7 @@
 package com.example.digital_attendance
 
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.database.Cursor
 import android.os.Bundle
 import android.widget.ArrayAdapter
@@ -80,6 +81,10 @@ class Faculty_Page : AppCompatActivity() {
             // Handle case when no records found
         }
 //        listview.adapter=aa
+    }
+    override fun onBackPressed() {
+        super.onBackPressed()
+        startActivity(Intent(this, MainActivity::class.java))
     }
     fun showDatePickerDialog() {
         val datePickerDialog = DatePickerDialog(

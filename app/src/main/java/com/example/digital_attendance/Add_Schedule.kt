@@ -210,6 +210,11 @@ class Add_Schedule : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         }
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        startActivity(Intent(this, Admin_Dashboard::class.java))
+    }
+
     fun showDatePickerDialog() {
         val datePickerDialog = DatePickerDialog(
             this,

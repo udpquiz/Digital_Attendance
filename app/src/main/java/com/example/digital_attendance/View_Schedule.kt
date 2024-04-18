@@ -1,6 +1,7 @@
 package com.example.digital_attendance
 
 import android.app.DatePickerDialog
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -69,6 +70,10 @@ class View_Schedule : AppCompatActivity() {
             deleteSchedule(scheduleId)
     }
 }
+    override fun onBackPressed() {
+        super.onBackPressed()
+        startActivity(Intent(this, Admin_Dashboard::class.java))
+    }
     fun showDatePickerDialog() {
         val datePickerDialog = DatePickerDialog(
             this,

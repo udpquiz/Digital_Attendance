@@ -36,4 +36,8 @@ class Add_Faculty : AppCompatActivity() {
             }
         }
     }
+    override fun onBackPressed() {
+        super.onBackPressed()
+        startActivity(Intent(this, Admin_Dashboard::class.java))
+    }
 }

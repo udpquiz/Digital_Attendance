@@ -92,6 +92,10 @@ class Student_Page : AppCompatActivity() {
         recyclerView.adapter = aa
 
     }
+    override fun onBackPressed() {
+        super.onBackPressed()
+        startActivity(Intent(this, Student_Activities::class.java))
+    }
 
     fun updateDataOnDateChange(selectedDate: String) {
         val sem1 = tsem.text.toString()

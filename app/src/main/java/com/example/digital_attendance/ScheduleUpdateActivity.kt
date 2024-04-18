@@ -243,6 +243,10 @@ class ScheduleUpdateActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
         // Handle view button click
 
     }
+    override fun onBackPressed() {
+        super.onBackPressed()
+        startActivity(Intent(this, View_Schedule::class.java))
+    }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         // Handle spinner item selection

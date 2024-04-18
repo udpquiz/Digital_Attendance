@@ -1,5 +1,6 @@
 package com.example.digital_attendance
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.RecyclerView
@@ -19,6 +20,10 @@ class View_Course : AppCompatActivity() {
         recyclerView.adapter = adapter
 
         fetchDataAndSetToAdapter()
+    }
+    override fun onBackPressed() {
+        super.onBackPressed()
+        startActivity(Intent(this, Admin_Dashboard::class.java))
     }
 
 private fun fetchDataAndSetToAdapter() {
