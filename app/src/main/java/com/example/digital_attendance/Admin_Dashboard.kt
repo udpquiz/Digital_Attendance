@@ -68,7 +68,7 @@ class Admin_Dashboard : AppCompatActivity() {
 //        }
         val back = findViewById<ImageView>(R.id.back)
         back.setOnClickListener{
-            startActivity(Intent(this,Student_Login::class.java))
+            startActivity(Intent(this,Admin_Login::class.java))
         }
 
         val sql = LJCRUD1(this)
@@ -96,10 +96,10 @@ class Admin_Dashboard : AppCompatActivity() {
             if (roomExists) {
                 Toast.makeText(this, "Room already exists!", Toast.LENGTH_SHORT).show()
             } else {
-                val isSuccess = sql.adddivision(roomNumber)
+                val isSuccess = sql.addroom(roomNumber)
                 if (isSuccess) {
                     Toast.makeText(this, "Room added successfully!", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this, Admin_Dashboard::class.java))
+//                    startActivity(Intent(this, Admin_Dashboard::class.java))
                 } else {
                     Toast.makeText(this, "Failed to add room!", Toast.LENGTH_SHORT).show()
                 }
@@ -131,7 +131,7 @@ class Admin_Dashboard : AppCompatActivity() {
                 val isSuccess = sql.adddivision(divisionName)
                 if (isSuccess) {
                     Toast.makeText(this, "Division added successfully!", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this, Admin_Dashboard::class.java))
+//                    startActivity(Intent(this, Admin_Dashboard::class.java))
                 } else {
                     Toast.makeText(this, "Failed to add division!", Toast.LENGTH_SHORT).show()
                 }

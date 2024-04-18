@@ -74,10 +74,7 @@ class Student_Login : AppCompatActivity() {
                         val enrollment = c.getString(0)
                         println(enrollment)
 
-                        if (inputEnroll.text.toString() == c.getString(0) && inputPassword.text.toString() == c.getString(
-                                1
-                            )
-                        ) {
+                        if (inputEnroll.text.toString() == c.getString(0) && inputPassword.text.toString() == c.getString(1)) {
                             // Successful login
                             Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show()
                             b.putString("enrollment", enrollment)
@@ -93,7 +90,9 @@ class Student_Login : AppCompatActivity() {
                                 editor.apply()
                                 editor.commit()
 //                                Toast.makeText(this,"Data Save",Toast.LENGTH_SHORT).show()
-                                startActivity(Intent(this,Student_Activities::class.java))
+                            val i = Intent(this, Student_Activities::class.java)
+                                i.putExtras(b)
+                                startActivity(i)
 //                            }
 //                            else{
 //                                editor.putString("enrollment",enrollment)

@@ -138,7 +138,7 @@
         android:id="@+id/SEM"
         android:layout_width="148dp"
         android:layout_height="39dp"
-        android:text="Enter Semester"
+        android:text="Select Semester"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

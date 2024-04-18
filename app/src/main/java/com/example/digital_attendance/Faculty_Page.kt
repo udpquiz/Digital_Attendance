@@ -15,7 +15,7 @@ import java.util.Calendar
 class Faculty_Page : AppCompatActivity() {
     lateinit var c: Cursor
     lateinit var c1: Cursor
-    lateinit var storedname:String
+    var storedname:String=""
     private lateinit var new2:String
     lateinit var aa:ArrayAdapter<String>
     lateinit var recyclerView: RecyclerView
@@ -49,8 +49,8 @@ class Faculty_Page : AppCompatActivity() {
             do{
                 val storename = c.getString(7)
                 if(storename==faculty_name.text) {
-                    storedname = storename
-                    new2 = storedname
+                    storedname = storename.toString()
+//                    new2 = storedname
                     println(storedname)
 //                    Toast.makeText(this,"$storedname",Toast.LENGTH_SHORT).show()
                 }
@@ -62,7 +62,7 @@ class Faculty_Page : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
         adapter = Schedule2()
         recyclerView.adapter = adapter
-        c1 = db.faculty_schedule(new2,date1.text.toString())!!
+        c1 = db.faculty_schedule(storedname.toString(),date1.text.toString())!!
         if (c1 != null && c1.count > 0) {
             c1.moveToFirst()
             while (!c1.isAfterLast) {
@@ -104,7 +104,7 @@ class Faculty_Page : AppCompatActivity() {
         adapter = Schedule2()
         recyclerView.adapter = adapter
         val db = LJCRUD1(this)
-        c1 = db.faculty_schedule(new2,date1.text.toString())!!
+        c1 = db.faculty_schedule(storedname.toString(),date1.text.toString())!!
         if (c1 != null && c1.count > 0) {
             c1.moveToFirst()
             while (!c1.isAfterLast) {

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
 
@@ -15,10 +16,12 @@ class Student_Activities : AppCompatActivity() {
         val enrollment = b?.getString("enrollment")
         Log.d("Student Act",enrollment.toString())
         setContentView(R.layout.activity_student_activities)
+        val enroll:TextView=findViewById(R.id.enroll)
+//        enroll.setText(enrollment)
         val logout: Button = findViewById(R.id.logout)
         val sp = getSharedPreferences("student_details", MODE_PRIVATE)
         val editor = sp.edit()
-
+        enroll.setText(sp.getString("enrollment","enrollment"))
         val sc = findViewById<CardView>(R.id.schedulebtn)
         val at = findViewById<CardView>(R.id.attendancebtn)
         val b1 = Bundle()

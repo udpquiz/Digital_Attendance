@@ -15,10 +15,10 @@ class Faculty_Login : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_faculty_login)
 
-        val btn_login: Button = findViewById(R.id.Btn_faculty_login)
-        btn_login.setOnClickListener {
-            startActivity(Intent(this, Admin_Dashboard::class.java))
-        }
+//        val btn_login: Button = findViewById(R.id.Btn_faculty_login)
+//        btn_login.setOnClickListener {
+//            startActivity(Intent(this, Admin_Dashboard::class.java))
+//        }
 
         val sql = LJCRUD1(this)
 
